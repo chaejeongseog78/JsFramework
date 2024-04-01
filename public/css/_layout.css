@@ -1,0 +1,8 @@
+<style>
+@charset "utf-8";
+/* LayOut */
+
+@import url("/resetcss/_web.css") screen and (min-width:1258px);
+@import url("/resetcss/_tarblet.css") screen and (min-width:861px) and (max-width:1257px);
+@import url("/resetcss/_mobile.css") screen and (max-width:860px);
+</style>
