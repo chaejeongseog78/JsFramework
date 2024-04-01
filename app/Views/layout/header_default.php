@@ -27,9 +27,9 @@
 
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
 
-	<header class="flex flex-row border border-b-indigo-500 h-[70px] m-0">
-		<div id="logo" class="w-[184px] border border-r-sky-700 flex justify-center items-center">LOGO2</div>
-		<div id="head" class="flex flex-row justify-end items-center w-full p-[20px] gap-7">
+	<header class="flex flex-row basis-0 justify-between border border-b-indigo-500 h-[70px] m-0">
+		<div id="logo" class="w-[184px] border border-r-sky-400 flex justify-center items-center">LOGO2</div>
+		<div id="head" class="flex flex-row justify-end items-center p-[20px] gap-x-24 border border-l-sky-700 ">
 			<p>About</p>
 			<p>Contact US</p>
 			<p>Blog</p>
@@ -37,9 +37,9 @@
 	</header>
 
 	<!-- [s] wrapper -->
-	<div id="wrapper" class="flex flex-row">
+	<div id="wrapper" class="flex flex-row m-0 flex-nowrap">
 
-		<nav class="border border-r-indigo-500 m-0 w-[184px]">
+		<nav class="flex flex-col border border-r-sky-400">
 			<div id="sidebar" class="bg-[#DDD]">
 				<div id="left_menu">
 					<div id="left_menu_top">Top</div>
@@ -54,7 +54,8 @@
 					<div id="left_menu_bottom">Bottom</div>
 				</div>
 			</div>
+			<div class="w-[184px]">jsd</div>
 		</nav>
 
 		<!-- [s] contents -->
-		<section class="m-0 border border-blue-90 w-full h-full p-[20px]">
+		<section class="p-[20px] w-[calc(100vh-186px)] h-[calc(100%-112px)]">

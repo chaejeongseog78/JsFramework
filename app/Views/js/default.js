@@ -1,7 +1,7 @@
 <script>
 	{$(window).scroll(function () {
 		let wd = $("#sidebar").width();
-		console.log(wd);
+		// console.log(wd);
 		let st = $(this).scrollTop();
 		// trace(st + ">" + $("#sidebar").height());
 		if (st > $("#sidebar").height()) {
@@ -14,7 +14,7 @@
 					opacity: "0.9",
 					"-moz-opacity": "0.9",
 				})
-				.slideDown("fast");
+				.slideDown(0);
 			$("#sidebar")
 				.css({
 					position: "absolute",
@@ -25,7 +25,7 @@
 					"-moz-opacity": "0.9",
 				})
 				.stop()
-				.animate({ top: st + 6 + "px" }, 700);
+				.animate({ top: st + 6 + "px" }, 500);
 		} else {
 			$("#sidebar")
 				.hide()
