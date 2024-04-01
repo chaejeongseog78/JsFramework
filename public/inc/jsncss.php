@@ -5,5 +5,9 @@ if (isset($_config) && isset($_config['_URL_Last_FileName'])) {
 
 	if (file_exists(APPPATH . "Views/css/" . $_config['_URL_Last_FileName'] . ".css")) {
 		require(APPPATH . "Views/css/" . $_config['_URL_Last_FileName'] . ".css");
+	} else {
+		if (file_exists(APPPATH . "Views/css/default.css")) {
+			require(APPPATH . "Views/css/default.css");
+		}
 	}
 }
