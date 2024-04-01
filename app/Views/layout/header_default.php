@@ -29,7 +29,7 @@
 
 	<header class="flex flex-row basis-0 justify-between border border-b-indigo-500 h-[70px] m-0">
 		<div id="logo" class="w-[184px] border border-r-sky-400 flex justify-center items-center">LOGO2</div>
-		<div id="head" class="flex flex-row justify-end items-center p-[20px] gap-x-24 border border-l-sky-700 ">
+		<div id="head" class="flex flex-row justify-end items-center p-[20px] gap-x-24">
 			<p>About</p>
 			<p>Contact US</p>
 			<p>Blog</p>
