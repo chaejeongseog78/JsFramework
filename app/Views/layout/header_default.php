@@ -29,7 +29,7 @@
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
 
 	<header class="flex flex-row basis-0 justify-between border border-b-indigo-500 h-[70px] m-0">
-		<div id="logo" class="w-[184px] border border-r-sky-400 flex justify-center items-center"><a href="/">LOGO2</a></div>
+		<div id="logo" class="w-[184px] border border-r-sky-400 flex justify-center items-center"><a href="/">JS Home</a></div>
 		<div id="head" class="flex flex-row justify-end items-center p-[20px] gap-x-24">
 			<p>About</p>
 			<p>Contact US</p>
@@ -47,10 +47,17 @@
 					<div id="left_menu_middle">
 						<h1><a href="/fileupload">PHOTO올리기</a></h1>
 						<h1>메뉴</h1>
+						<h1><a href="/test">TestPage</a></h1>
 						<h1>메뉴</h1>
 						<h1>메뉴</h1>
 						<h1>메뉴</h1>
 						<h1>메뉴</h1>
+						<h1>메뉴</h1>
+						<h1>메뉴</h1>
+						<h1>메뉴</h1>
+						<h1><a href="/upload/showimg">ShowImg</a></h1>
+						<h1>메뉴</h1>
+						<h1><a href="/doc/swagger/dist/">Swagger</a></h1>
 					</div>
 					<div id="left_menu_bottom">Bottom</div>
 				</div>

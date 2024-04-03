@@ -16,7 +16,7 @@
 						opacity: "0.9",
 						"-moz-opacity": "0.9",
 					})
-					.slideDown(0);
+					.slideDown("fast");
 				$("#sidebar")
 					.css({
 						position: "absolute",
@@ -27,7 +27,7 @@
 						"-moz-opacity": "0.9",
 					})
 					.stop()
-					.animate({ top: st + 4 + "px" }, 500);
+					.animate({ top: st + 6 + "px" }, 700);
 			} else {
 				$("#sidebar")
 					.hide()
