@@ -1,0 +1,10 @@
+{
+	"scripts": {
+		"build:css": "npx tailwindcss build ./public/css/_twinput.css -o ./public/css/_tailwind.css",
+		"minify:css": "npx tailwindcss -i ./public/css/_twinput.css -o ./public/css/_tailwind.css --minify",
+		"watch:css": "npx tailwindcss -i ./public/css/_twinput.css -o ./public/css/_tailwind.css --watch"
+	},
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
+  }
+}

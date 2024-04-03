@@ -1,0 +1,11 @@
+openapi: 3.0.0
+info:
+  title: 'JSFramwork API'
+  version: '0.1'
+paths:
+  /api/data.json:
+    get:
+      operationId: b0124d4897e6c141ed614a3301906a40
+      responses:
+        '200':
+          description: 'The result Data'

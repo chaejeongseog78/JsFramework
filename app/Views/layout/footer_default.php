@@ -14,8 +14,8 @@ if (isset($_config) && isset($_config['_URL_Last_FileName'])) {
 	if (file_exists(APPPATH . "Views/js/" . $_config['_URL_Last_FileName'] . ".js")) {
 		require(APPPATH . "Views/js/" . $_config['_URL_Last_FileName'] . ".js");
 	} else {
-		if (file_exists(APPPATH . "Views/js/default.js")) {
-			require(APPPATH . "Views/js/default.js");
+		if (file_exists(APPPATH . "Views/js/_default.js")) {
+			require(APPPATH . "Views/js/_default.js");
 		}
 	}
 }

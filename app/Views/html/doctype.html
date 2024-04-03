@@ -1,0 +1,86 @@
+<style type="text/css">
+</style>
+
+
+
+
+<!-- [s] Head Ttile -->
+<div id="head_title">
+	<ul id="title">
+		<li id="title_main"><span style="color:#F69500">▣</span>&nbsp;&nbsp;제목</li>
+		<li id="title_sub">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;제목 설명하는 곳입니다.</li>
+	</ul>
+</div>
+<!-- [e] Head Ttile -->
+
+
+
+
+<!-- [s] article -->
+<div id="article">
+
+
+
+
+<!-- [s] Code -->
+<form name="Frm" id="Frm" method="post" autocomplete="off" accept-charset="utf-8" onsubmit="return false" enctype="multipart/form-data">
+	<input type="text" name="JSD" value="" class="form-control input-sm">
+</form>
+
+<div id="DivListComCat">
+
+	<div class="cba">
+		<div id="cnt_per_page" class="fr">
+			<label for="limit">한 페이지에 표시할 수 </label>
+			<select id="limit_select" name="limit">
+				<option value="100">100&nbsp;</option>
+				<option value="200">200&nbsp;</option>
+			</select>
+		</div>
+	</div>
+
+	<div class="list_area">
+		<table class="table table-hover">
+			<colgroup>
+				<col width="30">
+				<col width="80">
+				<col width="*">
+				<col width="*">
+				<col width="115">
+				<col width="40">
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="thlC"><input type="checkbox" id="check_all"></th>
+					<th>관리번호</th>
+					<th>이름</th>
+					<th>설명</th>
+					<th>등록일시</th>
+					<th>수정</th>
+				</tr>
+			</thead>
+
+			<tbody id="list1">
+			</tbody>
+
+		</table>
+	</div>
+
+	<div class="cbb"><hr></div>
+	<div class="cbb"><hr style="border:none;"></div>
+	<div class="cbb"><hr style="border:none;height:10px;"></div>
+	<div class="cbb"><hr style="border-top:1px solid #F8F8F8 !important"></div>
+
+	<!-- [s] 페이징 -->
+	<div class="pageination" id="page_select">
+	</div>
+	<!-- [e] 페이징 -->
+
+</div>
+<!-- [e] Code -->
+
+
+
+
+</div>
+<!-- [e] article -->

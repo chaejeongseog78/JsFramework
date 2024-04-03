@@ -2,8 +2,10 @@
 
 use App\Controllers\Index;
 // use App\Controllers\Pages;
-// // use App\Controllers\Sample;
+use App\Controllers\Sample;
 // use App\Controllers\News;
+
+use App\Controllers\Upload;
 
 // $routes->setAutoRoute(true);
 // $routes->setDefaultController('Index');
@@ -14,7 +16,8 @@ use App\Controllers\Index;
 // $routes->get('/', 'Home::index');
 // $routes->get('/', 'Home::index', ['filter' => 'authFilter']);
 
-// $routes->get('sample', [Sample::class, 'index]);
+$routes->get('sample', [Sample::class, 'index']);
+$routes->get('sample/(:segment)', [Sample::class, 'param']);
 
 // $routes->get('pages', [Pages::class, 'index']);
 // $routes->get('(:segment)',  [Pages::class, 'view/$1']);
@@ -22,6 +25,13 @@ use App\Controllers\Index;
 // $routes->group('api', static function ($routes) {
 // $routes->get('news', [News::class, 'index']);
 // });
+
+
+$routes->group("upload", function ($routes) {
+	$routes->post("file", [Upload::class, 'index']);
+	$routes->get("showimg", [Upload::class, 'showimg']);
+	$routes->get('showimg/(:any)', [Upload::class, 'param']);
+});
 
 $routes->group("api", function ($routes) {
 	$routes->post("register", "Api\Register::index");
