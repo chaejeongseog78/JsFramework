@@ -2,6 +2,9 @@
 
 namespace App\Helpers;
 
+use PDO;
+use PDOException;
+
 class InitConfigGlobalHelper
 {
 	public static function getInitConfig()
@@ -15,6 +18,33 @@ class InitConfigGlobalHelper
 		}
 		$_ArrConfig['_URL_Last_FileName'] = $_URL_Last_FileName[0];
 
+
+
+		$_SERVER_NAME = str_replace("www.", "", $_SERVER["HTTP_HOST"]);
+		$_SVNAME = str_replace(".", "_", $_SERVER_NAME);
+		$_SVNAME = str_replace("-", "_", $_SVNAME);
+		$_ArrConfig['_SVNAME'] = $_SVNAME;
+
 		return $_ArrConfig;
+	}
+
+	public static function getConnPDO()
+	{
+		$servername = getenv('database.default.hostname');
+		$username = getenv('database.default.username');
+		$password = getenv('database.default.password');
+		$dbname = getenv('database.default.database');
+		try {
+			$dsn = "mysql:host={$servername};dbname={$dbname}";
+			$conn = new PDO($dsn, $username, $password);
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$conn->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
+			$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+			// dd("<p>DB 연결 성공</p>");
+			return $conn;
+		} catch (PDOException $e) {
+			return $e->getMessage();
+			exit;
+		}
 	}
 }

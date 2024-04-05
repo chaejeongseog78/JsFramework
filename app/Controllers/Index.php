@@ -3,16 +3,14 @@
 namespace App\Controllers;
 
 use CodeIgniter\Exceptions\PageNotFoundException;
-// use App\Helpers\InitConfigGlobalHelper;
+use App\Helpers\InitConfigGlobalHelper;
 
 class Index extends BaseController
 {
 	public function index(): string
 	{
 
-		$_config = _GetConfig();
-		// var_export($_config);
-		// $_config = InitConfigGlobalHelper::getInitConfig();
+		$_config = InitConfigGlobalHelper::getInitConfig();
 		// dd($_config);
 
 		if (

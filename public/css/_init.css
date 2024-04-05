@@ -9,12 +9,12 @@
 }
 
 html {
-	-ms-content-zooming: none;
-	touch-action: none;
+	/* -ms-content-zooming: none; */
+	/* touch-action: none; */
 }
 
 body {
-	overscroll-behavior-x: none;
+	/* overscroll-behavior-x: none; */
 
 	margin: 0px;
 	padding: 0px;

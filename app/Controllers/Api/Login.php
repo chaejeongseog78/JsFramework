@@ -8,9 +8,15 @@ use CodeIgniter\API\ResponseTrait;
 use Firebase\JWT\JWT;
 
 /**
- * @OA\Info(
- *     title="JSFramwork API",
- *     version="0.1"
+ * @OA\Info(title="JSFramwork API", version="1.0")
+ * 	@OA\SecurityScheme(
+ * 		type="http",
+ * 		description=" Use /auth to get the JWT token",
+ * 		name="Authorization",
+ * 		in="header",
+ * 		scheme="bearer",
+ * 		bearerFormat="JWT",
+ * 		securityScheme="bearerAuth",
  * )
  */
 
@@ -20,8 +26,7 @@ class Login extends BaseController
 
 
 	/**
-	 * @OA\Post(
-	 *  path="/api/login/",
+	 * @OA\Post(path="/api/login/",
 	 * 	summary="Method for Login post",
 	 * 	tags={"Login"},
 	 * 	@OA\RequestBody(
@@ -39,8 +44,9 @@ class Login extends BaseController
 	 *			),
 	 *		),
 	 *	),
-	 *   @OA\Response(response="200", description="Login Succesful"),
-	 *   @OA\Response(response="401", description="Not Found"),
+	 *  @OA\Response(response="200", description="Login Succesful"),
+	 *  @OA\Response(response="404", description="Not Found"),
+	 * 	security={ {"bearerAuth":{}}}
 	 * )
 	 */
 	public function index()

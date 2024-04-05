@@ -7,6 +7,8 @@ use App\Controllers\Sample;
 
 use App\Controllers\Upload;
 
+// use App\Helpers\InitConfigGlobalHelper;
+
 // $routes->setAutoRoute(true);
 // $routes->setDefaultController('Index');
 
@@ -40,6 +42,26 @@ $routes->group("api", function ($routes) {
 	$routes->get("me", "Api\Me::index", ['filter' => 'authFilter']);
 });
 
+$routes->group("ajax", function ($routes) {
+	// $_config = InitConfigGlobalHelper::getInitConfig();
+	// dd($_config);
+	// $buf = "Ajax\\" . $_config['_URL_Last_FileName'] . "::index";
+	// dd($buf);
+
+	$arrGo = explode('/', $_SERVER['REQUEST_URI']);
+	// dd($arrGo);
+	if (isset($arrGo[1]) && !empty($arrGo[1])) {
+		if (isset($arrGo[2]) && !empty($arrGo[2])) {
+			if (isset($arrGo[3]) && !empty($arrGo[3])) {
+
+				$buf = $arrGo[1] . "\\" . $arrGo[2] . "::" . $arrGo[3];
+
+				$routes->get('(:any)',  $buf);
+				$routes->post('(:any)',  $buf);
+			}
+		}
+	}
+});
 
 $routes->get('/', 'Index::index');
 $routes->get('(:segment)',  [Index::class, 'index']);

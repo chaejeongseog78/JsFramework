@@ -1,8 +1,8 @@
-<script type="text/javascript">
-	(function($)
-	{$(document).ready(function () {
+(function ($) {
+	$(document).ready(function () {
 		$(window).scroll(function () {
 			let wd = $("#sidebar").width();
+			let hi = $("#sidebar").height();
 			// console.log(wd);
 			let st = $(this).scrollTop();
 			// trace(st + ">" + $("#sidebar").height());
@@ -12,6 +12,7 @@
 					.css({
 						position: "fixed",
 						width: wd,
+						height: hi,
 						filter: "alpha(opacity=90)",
 						opacity: "0.9",
 						"-moz-opacity": "0.9",
@@ -22,6 +23,7 @@
 						position: "absolute",
 						"z-index": "998",
 						width: wd,
+						height: hi,
 						filter: "alpha(opacity=90)",
 						opacity: "0.9",
 						"-moz-opacity": "0.9",
@@ -34,6 +36,7 @@
 					.css({
 						position: "static",
 						width: wd,
+						height: hi,
 						filter: "alpha(opacity=100)",
 						opacity: "1",
 						"-moz-opacity": "1",
@@ -41,6 +44,5 @@
 					.slideDown(0);
 			}
 		});
-	})}
-	)(jQuery);
-</script>;
+	});
+})(jQuery);

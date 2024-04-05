@@ -81,19 +81,16 @@ class Upload extends BaseController
 		// echo $seg2 . "<br>";
 
 		$fileNm = "";
-		$flag = false;
 		if ($seg1) {
 			$fileNm  = $seg1;
 		}
 		if ($seg2) {
 			$fileNm .= '/' . $seg2;
-			$flag = true;
 		}
 		// echo $fileNm;
 
 		$path = WRITEPATH . 'uploads/';
 
-		if ($flag == false) $fileNm = 'loading2.gif';
 		$fullpath = $path . $fileNm;
 		if (!file_exists($fullpath)) {
 			$fileNm = 'loading2.gif';
