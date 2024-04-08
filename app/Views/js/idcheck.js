@@ -5,10 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			const user_id = document.querySelector("#user_id");
 			const xhr = XMLHttpRequest();
 			const gUrl =
-				ajax_URL_Last_FileName +
-				"/idcheck/id=" +
-				user_id.value +
-				"&pw=123&gbn=admin";
+				ajax_URL_Last_Nm + "/idcheck/id=" + user_id.value + "&pw=123&gbn=admin";
 			// alert(gUrl);
 			xhr.open("GET", gUrl, true);
 			// 요청 전송

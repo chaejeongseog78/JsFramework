@@ -48,16 +48,23 @@ $routes->group("ajax", function ($routes) {
 	// $buf = "Ajax\\" . $_config['_URL_Last_FileName'] . "::index";
 	// dd($buf);
 
-	$arrGo = explode('/', $_SERVER['REQUEST_URI']);
+	$url = new \CodeIgniter\HTTP\URI(current_url());
+	$arrUrl = $url->getsegments();
+	// print_r($arrUrl);
+	$groupNm =    isset($arrUrl[1]) ? $arrUrl[1] : "";
+	$controller = isset($arrUrl[2]) ? $arrUrl[2] : "";
+	$method =     isset($arrUrl[3]) ? $arrUrl[3] : "";
+
+	// $arrGo = explode('/', $_SERVER['REQUEST_URI']);
 	// dd($arrGo);
-	if (isset($arrGo[1]) && !empty($arrGo[1])) {
-		if (isset($arrGo[2]) && !empty($arrGo[2])) {
-			if (isset($arrGo[3]) && !empty($arrGo[3])) {
+	if (isset($groupNm) && !empty($groupNm)) {
+		if (isset($controller) && !empty($controller)) {
+			if (isset($method) && !empty($method)) {
 
-				$buf = $arrGo[1] . "\\" . $arrGo[2] . "::" . $arrGo[3];
+				$goBuf = $groupNm . "\\" . $controller . "::" . $method;
 
-				$routes->get('(:any)',  $buf);
-				$routes->post('(:any)',  $buf);
+				$routes->get('(:any)',  $goBuf);
+				$routes->post('(:any)',  $goBuf);
 			}
 		}
 	}

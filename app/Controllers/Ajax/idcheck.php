@@ -20,7 +20,7 @@ class idcheck extends BaseController
 			$_config = InitConfigGlobalHelper::getInitConfig();
 			$sock = InitConfigGlobalHelper::getConnPDO();
 
-			parse_str($_config['_URL_Last_FileName'], $arrQryDat);
+			parse_str($_config['_URL_Last_Nm'], $arrQryDat);
 			// print_r($arrQryDat);
 
 			$user_id = $arrQryDat['id'];

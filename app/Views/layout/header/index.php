@@ -2490,8 +2490,8 @@ $VideoId = $random[array_rand($random)];
 	</style>
 
 
-	<script type="text/javascript" src="/js/vendor/jquery-1.8.3.min.js"></script>
-	<script type="text/javascript" src="/js/vendor/jquery-confirm.js"></script>
+	<script type="text/javascript" src="/js/vendor/jquery-3.7.1.min.js"></script>
+	<!-- <script type="text/javascript" src="/js/vendor/jquery-confirm.min.js"></script> -->
 	<script type="text/javascript" charset="utf-8" src="/js/vendor/jquery.tubular.1.0.js"></script>
 
 	<script type="text/javascript">

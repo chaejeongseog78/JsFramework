@@ -16,7 +16,7 @@ class InitConfigGlobalHelper
 		if (isset($_REQUEST['q'])) {
 			$_URL_Last_FileName[0] = $_REQUEST['q'];
 		}
-		$_ArrConfig['_URL_Last_FileName'] = $_URL_Last_FileName[0];
+		$_ArrConfig['_URL_Last_Nm'] = $_URL_Last_FileName[0];
 
 
 

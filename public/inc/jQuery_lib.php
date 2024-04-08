@@ -1,11 +1,8 @@
-<!-- <script type="text/javascript" src="/js/vendor/jquery-1.8.3.min.js"></script> -->
-<!-- <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script> -->
-<script type="text/javascript" src="/js/vendor/jquery-3.7.0.min.js"></script>
+<script type="text/javascript" src="/js/vendor/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="/js/vendor/jquery-confirm.min.js"></script>
 
-<!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> -->
 
 <!-- <script type="text/javascript" src="/js/vendor/common.js"></script>
-<script type="text/javascript" src="/js/vendor/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/vendor/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/js/vendor/plugins.js"></script>
 <script type="text/javascript" src="/js/vendor/holder.js"></script>
@@ -28,7 +25,6 @@
 <script type="text/javascript" src="/js/vendor/jquery.alphanumeric.pack.js"></script>
 <script type="text/javascript" src="/js/vendor/ajaxfileupload.js"></script>
 <script type="text/javascript" src="/js/vendor/bootbox.min.js"></script>
-<script type="text/javascript" src="/js/vendor/jquery-confirm.js"></script>
 <script type="text/javascript" src="/js/vendor/jquery.hoverIntent.js"></script>
 <script type="text/javascript" src="/js/vendor/jquery.cluetip.js"></script>
 <script type="text/javascript" src="/js/vendor/jquery.smartPop.js"></script>
@@ -37,3 +33,6 @@
 
 <script type="text/javascript" src="/js/vendor/pako.js"></script>
 <script type="text/javascript" src="/js/vendor/jquery.serializejson.min.js"></script> -->
+
+<!-- confirm-setting.js -->
+<script type="text/javascript" src="/js/vendor/confirm-setting.js"></script>

@@ -15,14 +15,14 @@ class Index extends BaseController
 
 		if (
 			isset($_config) &&
-			isset($_config['_URL_Last_FileName']) &&
-			file_exists(APPPATH . "Views/html/" . $_config['_URL_Last_FileName'] . ".html")
+			isset($_config['_URL_Last_Nm']) &&
+			file_exists(APPPATH . "Views/html/" . $_config['_URL_Last_Nm'] . ".html")
 		) {
 
 			$data['_config'] = $_config;
 
 			return view('layout/header', $data)
-				. view('html/' . $_config['_URL_Last_FileName'] . '.html', $data)
+				. view('html/' . $_config['_URL_Last_Nm'] . '.html', $data)
 				. view('layout/footer', $data);
 		} else throw new PageNotFoundException();
 	}

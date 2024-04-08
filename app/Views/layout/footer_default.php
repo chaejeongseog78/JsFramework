@@ -12,14 +12,14 @@
 
 
 <?php
-echo "<script type='text/javascript'>var ajax_URL_Last_FileName = '/ajax/" . $_config['_URL_Last_FileName'] . "';</script>";
+echo "<script type='text/javascript'>var ajax_URL_Last_Nm = '/ajax/" . $_config['_URL_Last_Nm'] . "';</script>";
 echo "<script type='text/javascript'>";
 if (file_exists(APPPATH . "Views/js/_default.js")) {
 	require(APPPATH . "Views/js/_default.js");
 }
-if (isset($_config) && isset($_config['_URL_Last_FileName'])) {
-	if (file_exists(APPPATH . "Views/js/" . $_config['_URL_Last_FileName'] . ".js")) {
-		require(APPPATH . "Views/js/" . $_config['_URL_Last_FileName'] . ".js");
+if (isset($_config) && isset($_config['_URL_Last_Nm'])) {
+	if (file_exists(APPPATH . "Views/js/" . $_config['_URL_Last_Nm'] . ".js")) {
+		require(APPPATH . "Views/js/" . $_config['_URL_Last_Nm'] . ".js");
 	}
 }
 echo "</script>";
