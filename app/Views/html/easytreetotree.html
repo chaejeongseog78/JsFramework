@@ -1,0 +1,115 @@
+<!-- http://www.easyjstree.com/Demos 참조 -->
+<link href="/css/vendor/easytreeSkin_lion/ui.easytree.css" rel="stylesheet" class="skins" type="text/css">
+<!--[if lt IE 8]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+<![endif]-->
+<style type="text/css">
+</style>
+
+
+
+
+<!-- [s] Head Ttile -->
+<div id="head_title">
+	<ul id="title">
+		<li id="title_main"><span style="color:#F69500">▣</span>&nbsp;&nbsp;배열번호 지정관리</li>
+		<li id="title_sub">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;배열번호 추가 또는 수정 / 삭제 하는 곳입니다.</li>
+	</ul>
+</div>
+<!-- [e] Head Ttile -->
+
+
+<!-- [s] article -->
+<div id="article">
+
+
+
+
+<table width="100%" class="table table-bordered lht150">
+<colgroup>
+	<col width="45%">
+	<col width="5%">
+	<col width="50%">
+</colgroup>
+<thead>
+	<th class="center">미사용</th>
+	<th class="center">이동</th>
+	<th class="center">사용중</th>
+</thead>
+<tbody>
+<tr>
+	<td style="vertical-align:top;">
+
+<div class="box fl" style="width:100%;">
+	<div class="box_content">
+		<input type="text" value="NewNode" style="width:250px" id="nodeText1" onfocus='FocusOn(this)' onblur='FocusOff(this)'>
+		<br>
+		<input type="checkbox" checked id="nodeIsFolder1"> Is Folder
+		<br>
+
+		<button type="button" class="btn btn-default btn-xs" onclick="addNode1(); return false;">Add</button>
+		<button type="button" class="btn btn-default btn-xs" onclick="removeNodeX1(); return false;">Remove</button>
+		<!-- <button type="button" class="btn btn-default btn-xs" onclick="activateNode(); return false;">Activate</button>
+		<button type="button" class="btn btn-default btn-xs" onclick="toggleNode(); return false;">Toggle</button>
+		<button type="button" class="btn btn-default btn-xs" onclick="openNode(); return false;">Open</button>
+		<button type="button" class="btn btn-default btn-xs" onclick="closeNode(); return false;">Close</button> -->
+		<button type="button" class="btn btn-default btn-xs" id="catModiy1">Modify</button>
+
+		<select id="lstNodes1" style="display:none;"></select>
+
+	</div>
+</div>
+
+<div class="cbb"><hr></div>
+
+
+<div id="demo_menu1" style="float:left; width:100%;">
+</div>
+
+
+	</td>
+	<td class="center"> <span class="glyphicon glyphicon-arrow-left"></span><span class="glyphicon glyphicon-arrow-right"></span> </td>
+	<td style="vertical-align:top;">
+
+<div class="box fl" style="width:100%;">
+	<div class="box_content">
+		<input type="text" value="NewNode" style="width:250px" id="nodeText2" onfocus='FocusOn(this)' onblur='FocusOff(this)'>
+		<br>
+		<input type="checkbox" checked id="nodeIsFolder2"> Is Folder
+		<br>
+
+		<button type="button" class="btn btn-default btn-xs" onclick="addNode2(); return false;">Add</button>
+		<button type="button" class="btn btn-default btn-xs" onclick="removeNodeX2(); return false;">Remove</button>
+		<!-- <button type="button" class="btn btn-default btn-xs" onclick="activateNode(); return false;">Activate</button>
+		<button type="button" class="btn btn-default btn-xs" onclick="toggleNode(); return false;">Toggle</button>
+		<button type="button" class="btn btn-default btn-xs" onclick="openNode(); return false;">Open</button>
+		<button type="button" class="btn btn-default btn-xs" onclick="closeNode(); return false;">Close</button> -->
+		<button type="button" class="btn btn-default btn-xs" id="catModiy2">Modify</button>
+		<button type="button" class="btn btn-primary btn-xs" id="catSave">Save</button>
+
+		<select id="lstNodes2" style="display:none;"></select>
+
+	</div>
+</div>
+
+<div class="cbb"><hr></div>
+
+
+<div id="demo_menu2" style="float:right; width:100%;">
+</div>
+
+
+	</td>
+</body>
+</table>
+
+<div class="cbb"><hr></div>
+
+<div id="contentsinfo">
+</div>
+
+
+
+
+</div>
+<!-- [e] article -->

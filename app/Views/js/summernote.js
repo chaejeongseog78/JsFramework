@@ -6,18 +6,18 @@ document.addEventListener("DOMContentLoaded", () => {
 		btn_submit.addEventListener("click", (e) => {
 			e.preventDefault();
 
-			// if (chkForm()) {
-			$.confirm({
-				keyboardEnabled: true,
-				content:
-					'<p>등록 하시겠습니까? <span class="txtBold">[Enter:Save / ESC:Cancel]</span></p>',
-				confirmKeys: [13], //Enter
-				confirm: function () {
-					chkWrite();
-				},
-				cancel: function () {},
-			});
-			// }
+			if (chkForm()) {
+				// $.confirm({
+				// 	keyboardEnabled: true,
+				// 	content:
+				// 		'<p>등록 하시겠습니까1? <span class="txtBold">[Enter:Save / ESC:Cancel]</span></p>',
+				// 	confirmKeys: [13], //Enter
+				// 	confirm: function () {
+				// 		chkWrite();
+				// 	},
+				// 	cancel: function () {},
+				// });
+			}
 
 			const f1 = new FormData();
 
@@ -66,27 +66,27 @@ document.addEventListener("DOMContentLoaded", () => {
 			return false;
 		}
 
-		if (empty(Frm.pg_id.value)) {
-			$("input[name='pg_id']").parent().addClass("error");
-			Frm.pg_id.focus();
-			alertMSGbyTime("PG ID를 선택하세요!", 4000);
-			return false;
-		} else {
-			$("input[name='pg_id']").parent().addClass("success");
-		}
-		if (!form_check("#form_reg")) {
-			return false;
-		}
+		// if (empty(Frm.pg_id.value)) {
+		// 	$("input[name='pg_id']").parent().addClass("error");
+		// 	Frm.pg_id.focus();
+		// 	alertMSGbyTime("PG ID를 선택하세요!", 4000);
+		// 	return false;
+		// } else {
+		// 	$("input[name='pg_id']").parent().addClass("success");
+		// }
+		// if (!form_check("#form_reg")) {
+		// 	return false;
+		// }
 		return true;
 	};
 
 	const getList = () => {};
 
 	const onLoad = () => {
-		$.alert({
-			title: "Alert!",
-			content: "Simple alert!",
-		});
+		// $.alert({
+		// 	title: "Alert!",
+		// 	content: "Simple alert!",
+		// });
 		$("#summernote").summernote({
 			placeholder: "내용을 입력하여 주세요",
 			tabsize: 2,

@@ -1,0 +1,854 @@
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+<!-- http://www.easyjstree.com/Demos 참조 -->
+<link href="/css/vendor/easytreeSkin_lion/ui.easytree.css" rel="stylesheet" class="skins" type="text/css">
+<!--[if lt IE 8]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+<![endif]-->
+
+
+<!-- [s] Article -->
+
+<style type="text/css">
+#navigation{z-index:3999;background:#fff;border:1px solid #1a569e;border-radius:5px;height:30px;margin-top:0px}
+#navigation ul{z-index:3998;list-style:none}
+#navigation ul li{z-index:3997;display:inline;float:left;position:relative}
+#navigation ul li a{text-decoration:none;display:inline-block;float:left;line-height:30px;padding:0 20px;color:#333}
+#navigation ul li a:hover{color:#00f;color:#ddd;background:#1a569e}
+#navigation ul li ul{z-index:3996;background:#fff;border:1px solid #1a569e;border-top:0;display:none;position:absolute;top:30px;border-radius:0}
+#navigation ul li ul li a{width:170px}
+#navigation ul li ul li ul{z-index:3995;display:none}
+#navigation ul li ul li:hover>ul{z-index:3994;display:block;top:0;left:100%;border:1px solid #1a569e}
+#navigation ul li:hover>ul{display:block}
+</style>
+
+
+<style type="text/css">
+table th {
+	text-align: center;
+}
+table .tbsubject {
+	text-align: center;
+}
+table .tdcenter {
+	text-align: center;
+}
+</style>
+
+
+<style type="text/css">
+#banner li{
+	float:left;
+	width:78px;
+}
+#banner_wrap{
+	width:814px;
+	padding:10px 20px;
+	margin:0 auto;border:1px solid #ddd;
+}
+#banner{
+	width:5000px; /*넉넉히 많이 주세요*/
+}
+#frame{
+	width:775px;
+	height:54px;
+	overflow:hidden;
+	position:relative;
+	margin:10px auto;
+}
+</style>
+
+
+
+
+<div id="category_path">HOME</div>
+
+<div id="navigation"></div>
+
+<div id="mnuComment"></div>
+
+
+
+
+<section id="gJSTiles" style="margin-top:20px">
+
+	<table style="width:100%" align="center">
+	<tr>
+		<td style="width:30%;text-align:left">
+
+			<div id="mnuattrib">
+				<label for="displayAttrib">정렬순서:</label>
+				<select id="mnuattrib_select" name="mnuattrib_select">
+					<option value="9">카테고리 설정순</option>
+					<option value="1">최근 등록상품이 위로</option>
+					<option value="2">최근 등록상품이 아래로</option>
+					<option value="3">상품명 가나다순</option>
+					<option value="4">상품명 가나다역순</option>
+					<option value="5">판매가 높은순</option>
+					<option value="6">판매가 낮은순</option>
+				</select>
+			</div>
+
+		</td>
+		<td style="width:40%;text-align:center">
+
+			<div id="bottomSearch">
+			<table align="center" border="0" cellpadding="0" cellspacing="0" style="text-align:center">
+			<tr>
+				<td>
+					<select id="search_select" name="searchType">
+						<option value="itm_name">품명</option>
+						<option value="itm_code">코드</option>
+					</select>
+				</td>
+				<td width="10"></td>
+				<td>
+
+					<table align="center" border="0" cellpadding="0" cellspacing="0" style="text-align:center">
+					<tr>
+						<td><input id="search_text" type="text" name="search_text" style="width:150px" /></td>
+					</tr>
+					<tr>
+						<td style="height:1px"></td>
+					</tr>
+					<tr>
+						<td><span id="autocomplete"></span></td>
+					</tr>
+					</table>
+
+				</td>
+				<td width="10"></td>
+				<td>
+					<button type="button" id="search_submit" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-search"></span> 검색</button>
+				</td>
+			</tr>
+			</table>
+			</div>
+
+		</td>
+		<td style="width:30%;text-align:right">
+
+			<div class="pull-right" style="padding:2px">
+				<div class="btn btn-danger btn-xs" id="setGiftDefind"><span class="glyphicon glyphicon-cog"> </span> 사은품 지정</div> <div class="btn btn-danger btn-xs" id="setBestDefind"><span class="glyphicon glyphicon-cog"> </span> 베스트상품 지정</div>
+			</div>
+
+		</td>
+	</tr>
+	</table>
+
+
+	<!-- [s] best_item_area -->
+	<div id="banner_wrap">
+		<div id="frame">
+			<ul id="banner">
+				<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진0" /></a></li>
+				<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진1" /></a></li>
+				<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진2" /></a></li>
+				<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진3" /></a></li>
+				<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진4" /></a></li>
+				<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진5" /></a></li>
+				<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진6" /></a></li>
+				<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진7" /></a></li>
+				<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진8" /></a></li>
+				<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진9" /></a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- [e] best_item_area -->
+
+
+	<div>
+	<form name="gJSTilesFrm" method="post">
+	<table id="mytable_list" align="center" class="listTable table table-condensed table-bordered table-hover">
+		<thead>
+			<tr>
+	<th style="width: 5%;">순서</th>
+	<th class="dlist-sortable" style="width: 15%;">코드</th>
+	<th class="dlist-sortable" style="width: 40%;">품명</th>
+	<th class="dlist-sortable" style="width: 10%;">규격</th>
+	<th class="dlist-sortable" style="width: 10%;">색상</th>
+	<th class="dlist-sortable" style="width: 10%;">단가</th>
+	<th style="width: 10%;"><input type="checkbox" id="check_all"></th>
+			</tr>
+		</thead>
+		<tbody id="table-3">
+		</tbody>
+	</table>
+	</form>
+	</div>
+
+	<div id="info"></div>
+
+	<div id="page_select" class="pageination"></div>
+
+	<table style="width:100%" align="center">
+	<tr>
+		<td style="width:30%;text-align:left">
+
+			<div id="page_list">
+				<label for="limit">Page:</label>
+				<select id="limit_select" name="limit">
+					<option value="10">10</option>
+					<option value="20">20</option>
+					<option value="50">50</option>
+					<option value="100">100</option>
+				</select>&nbsp;&nbsp;개 표시
+			</div>
+
+		</td>
+
+		<td style="width:40%;text-align:center"></td>
+
+		<td style="width:30%;text-align:right"></td>
+	</tr>
+	</table>
+
+</section>
+
+
+<div id="loader" style="display: table; margin-left: auto; margin-right: auto;">
+	<table border="0" align="center"><tr><td align="center"><div id="loaderCircle"></div></td></tr></table>
+</div>
+
+<div id="searchResult" style="display: table; margin-left: auto; margin-right: auto;">
+	<table border="0" align="center"><tr><td align="center"><div id="searchRes"></div></td></tr></table>
+</div>
+
+
+
+<script type="text/javascript">
+
+function stateChanged(nodes, nodesJson) {
+
+	window.orderlist = '<ul>\n';
+	nodesChk(nodes,0,false,'');
+	window.orderlist += '</ul>\n';
+	window.orderListTree = $("#navigation").html(window.orderlist);
+
+}
+
+function numToStr(thread_num){
+	var my_thread_info = '';
+	if((thread_num >= 100) && (thread_num < 1000)) {
+		my_thread_info = "0" + thread_num;
+	} else if((thread_num >= 10) && (thread_num < 100)) {
+		my_thread_info = "00" + thread_num;
+	} else if (thread_num < 10) {
+		my_thread_info = "000" + thread_num;
+	} else {
+		my_thread_info = thread_num;
+	}
+	return my_thread_info;
+}
+
+function nodesChk(nodes,depth,active,INFO){
+
+	var thread_info;
+	var str;
+	var thread_num = 0;
+	var diStr = '';
+	var i = 0;
+	var start = 0;
+	for (i = 0; i < nodes.length; i++) {
+
+		str = nodes[i].id.split('_');
+		start = str.length - depth;
+		thread_info = '';
+		for (cnt = start; cnt < str.length+1; cnt++) {
+			thread_num  = Number(str[cnt-1]);
+			thread_info += numToStr(thread_num);
+		}
+
+		str = nodes[i].href;
+		ID = str.substring(1, str.length);
+
+		if(window.objOver[ID]){ // 표시안함에 해당될 때
+			INFO  = thread_info;
+			active = true;
+		}
+
+
+		if(active){
+
+			if(thread_info.substring(0,INFO.length) == INFO){
+
+
+				active = true;
+
+				// Skip
+				//window.orderlist += '<li data-id='+ID+' data-depth='+depth+' data-info='+thread_info+'><a>' + nodes[i].text + '</a>\n';
+				if (nodes[i].children && nodes[i].children.length > 0) {
+					//window.orderlist += '<ul>\n';
+					nodesChk(nodes[i].children,depth+1,active,INFO);
+					//window.orderlist += '</ul>\n';
+					//window.orderlist += '</li>\n';
+				} else {
+					//window.orderlist += '</li>\n';
+				}
+
+
+			}else{
+
+
+				INFO  = '';
+				active = false;
+
+				window.orderlist += '<li class="launch_app" data-id='+ID+' data-depth='+depth+' data-info='+thread_info+'><a>' + nodes[i].text + '</a>\n';
+				if (nodes[i].children && nodes[i].children.length > 0) {
+					window.orderlist += '<ul>\n';
+					nodesChk(nodes[i].children,depth+1,active,INFO);
+					window.orderlist += '</ul>\n';
+					window.orderlist += '</li>\n';
+				} else {
+					window.orderlist += '</li>\n';
+				}
+
+
+			}
+
+
+		}else{
+
+
+				window.orderlist += '<li class="launch_app" data-id='+ID+' data-depth='+depth+' data-info='+thread_info+'><a>' + nodes[i].text + '</a>\n';
+				if (nodes[i].children && nodes[i].children.length > 0) {
+					window.orderlist += '<ul>\n';
+					nodesChk(nodes[i].children,depth+1,active,INFO);
+					window.orderlist += '</ul>\n';
+					window.orderlist += '</li>\n';
+				} else {
+					window.orderlist += '</li>\n';
+				}
+
+
+		}
+
+
+	}
+
+}
+
+
+
+(function($){$(document).ready(function(){
+
+var getMnuOver = function(action){ //표시유무 확인
+
+	$.ajax({
+		//url: '//acebebe.iptime.org/data/' + window.$_SVNAME + '/getMnuOver.php',
+		url: '/data/getMnuOver.php',
+		dataType: 'html',
+		data : {
+		},
+		success: function(data){
+			OverChk(data);// 무조건 실행한다
+		}
+	});
+
+};
+
+var OverChk = function(data){
+	if(data!=='null'){ // 여기서 'null'인지 확인
+		arrOverValue = data.split(",");
+		for (var idx in arrOverValue){
+			window.objOver[arrOverValue[idx]] =arrOverValue[idx];
+		}
+	}
+	getCategory();
+};
+
+var getCategory = function() {
+	$.ajax({
+
+		//url: '//acebebe.iptime.org/data/' + window.$_SVNAME + '/getCategory.php',
+		url: '/data/getCategory.php',
+
+		dataType: 'json',
+		data : {
+		},
+		success: function(data){
+			if(data!==null){
+
+				window.jsonData = data;
+
+				window.easytree = $('#navigation').easytree({
+					data: window.jsonData,
+					stateChanged: stateChanged
+				});
+			}
+		},
+		error: function(e){
+			trace('error : '+e);
+		}
+	});
+};
+
+var init = function() {
+
+	getMnuOver('getOver'); //표시유무 확인
+
+	gJSTiles = new gJSTiles({
+		ContentsID: '#contents',
+		TilesID: '#tileBody',
+		LoaderCircleID: '#loaderCircle',
+		DisWidth: 176,
+		DisPadding: 18
+	});
+	gJSTiles.init('0000');
+
+};
+
+
+var gJSTiles = function(options, exfuncs){
+	var me = this;
+	this.exfunc={
+		getCode: null,
+		main_reload: null
+	};
+	var ex = this.exfunc;
+	this.o={
+		searchRes: 'div#searchRes',
+		workAreaDiv: 'section#tileBody'
+	};
+	var o = this.o;
+
+
+	this.method={
+		init: function(thread_info){
+			me.thread_info = thread_info;
+			me.page = 1;
+
+			$(o.LoaderCircleID).ajaxStart(function() {
+				$(this).show();
+				me.fworking = true;
+			}).ajaxStop(function() {
+				$(this).hide();
+				me.fworking = false;
+			});
+			//me.urlParamsChk();
+
+			me.start();
+		},
+		urlParamsChk: function(){
+			var e,
+				a = /\+/g,
+				r = /([^&=]+)=?([^&]*)/g,
+				d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
+				q = window.location.search.substring(1);
+			while (e = r.exec(q))
+				window.urlParams[d(e[1])] = d(e[2]);
+		},
+		start: function(){
+			me.listener();
+			me.onPosition(true);
+			me.loadData();
+		},
+		onPosition: function(flag){
+			me.cntSize = Math.floor($(o.ContentsID).width()/(o.DisWidth+(o.DisPadding*2)));//padding plus
+		},
+		loadData: function(){
+			if(window.timeout)
+				clearInterval(window.timeout);
+
+			var page = (typeof me.page == 'undefined')? 1 : me.page;
+
+			var num_per_page = ($('#limit_select option:selected').val())? $('#limit_select option:selected').val() : 10;
+			var searchType = encodeURIComponent( ($('#search_select option:selected').val())? $('#search_select option:selected').val() : '' );
+			var searchText = encodeURIComponent( ($('#search_text').val())? $('#search_text').val() : '' );
+
+			var pathURL = 'page='+me.page+'&num_per_page='+num_per_page+'&thread_info='+me.thread_info+'&searchType='+searchType+'&searchText='+searchText;
+			$.ajax({
+				type : 'post',
+				url: me.apiURL,
+				dataType: 'json',
+				data : {
+					page : page,
+					num_per_page : num_per_page,
+					searchType : searchType,
+					searchText : searchText,
+
+					thread_info: me.thread_info
+				},
+				beforeSend: function () {
+					if (me.localCache.exist(pathURL)) {
+						trace('exist ok=> '+pathURL);
+						var data = me.localCache.get(pathURL);
+						me.listUpProducts(data,page,num_per_page);
+						return false;
+					}
+					return true;
+				},
+				complete: function (jqXHR, textStatus) {
+					if(textStatus == "success"){
+						var data = jqXHR['responseText'];
+						trace('not exist => '+pathURL);
+						if(data!==null && typeof data !== 'undefined' && data.length > 0){
+							me.localCache.set(pathURL, data);
+							data = me.localCache.get(pathURL);
+							me.listUpProducts(data,page,num_per_page);
+						} else {
+							me.clearDisplay(); //cls
+						}
+					}else me.clearDisplay(); //cls
+				}
+			});
+		},
+		loadDataByMnuAttrib: function(){
+			if(window.timeout)
+				clearInterval(window.timeout);
+
+			var page = (typeof me.page == 'undefined')? 1 : me.page;
+
+			var num_per_page = ($('#limit_select option:selected').val())? $('#limit_select option:selected').val() : 10;
+			var mnuattrib = ($('#mnuattrib_select option:selected').val())? $('#mnuattrib_select option:selected').val() : 9;
+			var searchType = encodeURIComponent( ($('#search_select option:selected').val())? $('#search_select option:selected').val() : '' );
+			var searchText = encodeURIComponent( ($('#search_text').val())? $('#search_text').val() : '' );
+
+			var pathURL = 'page='+me.page+'&num_per_page='+num_per_page+'&thread_info='+me.thread_info+'&mnuattrib='+mnuattrib+'&searchType='+searchType+'&searchText='+searchText;
+			$.ajax({
+				type : 'post',
+				url: me.apiURL,
+				dataType: 'json',
+				data : {
+					page : page,
+					num_per_page : num_per_page,
+					mnuattrib : mnuattrib,
+					searchType : searchType,
+					searchText : searchText,
+
+					thread_info: me.thread_info
+				},
+				beforeSend: function () {
+					if (me.localCache.exist(pathURL)) {
+						trace('exist ok=> '+pathURL);
+						var data = me.localCache.get(pathURL);
+						me.listUpProducts(data,page,num_per_page);
+						return false;
+					}
+					return true;
+				},
+				complete: function (jqXHR, textStatus) {
+					if(textStatus == "success"){
+						var data = jqXHR['responseText'];
+						trace('not exist => '+pathURL);
+						if(data!==null && typeof data !== 'undefined' && data.length > 0){
+							me.localCache.set(pathURL, data);
+							data = me.localCache.get(pathURL);
+							me.listUpProducts(data,page,num_per_page);
+						} else {
+							me.clearDisplay(); //cls
+						}
+					}else me.clearDisplay(); //cls
+				}
+			});
+		},
+		clearDisplay: function(){
+			trace('this clearDisplay');
+			$('#category_path').html('HOME');
+			$('#mytable_list tbody').empty();
+			$('#searchRes').html('<p></p><p align="center">자료가 없습니다.!</p>');
+			$('#page_select').empty();
+
+			var buf = '<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진0" /></a></li>'
+			+ '<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진1" /></a></li>'
+			+ '<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진2" /></a></li>'
+			+ '<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진3" /></a></li>'
+			+ '<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진4" /></a></li>'
+			+ '<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진5" /></a></li>'
+			+ '<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진6" /></a></li>'
+			+ '<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진7" /></a></li>'
+			+ '<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진8" /></a></li>'
+			+ '<li><a href="#"><img src="/img/no_img.jpg" style="width:72px;height:54px" alt="사진9" /></a></li>';
+			$('#banner')[0].innerHTML = buf;
+
+		},
+		listUpProducts: function(data,page,num_per_page){
+			data = JSON.parse(data);
+
+			if(data['res_page']['mnu_bestitem']){
+				me.listUpBestItem(data['res_page']['mnu_bestitem']);
+			}else{
+				$('#owl-bestproduct').empty();
+			}
+
+			$('#category_path').html(data['res_page']['pathName']);
+			if(data['res_page']['mnu_userfile']){
+				$('#mnuComment').html('<img src="/data/'+$_SVNAME+'/banner_frame_resource/'+data['res_page']['mnu_userfile'].split('|')[0]+'" style="width:100%;height:auto">'+data['res_page']['mnu_comment']);
+			}
+			$('#mnuattrib_select option[value="'+data['res_page']['mnu_attrib']+'"]').prop('selected', true); //정렬순서
+			me.list_display(data);
+			me.pagination(data,page,num_per_page,'page_select');
+			$('#limit_select option[value="'+num_per_page+'"]').prop('selected', true);
+			$('#searchRes').empty();
+		},
+		listUpBestItem: function(bestdata){
+			data = JSON.parse(bestdata);
+			var buf = '';
+			var cnt = 0;
+			for(var i in data) {
+				if(data[i]['itm_imgs'])
+					buf += '<li><a href="#"><img src="data/'+$_SVNAME+'/product_img/'+data[i]['itm_imgs']+'" style="width:72px;height:54px" alt="'+data[i]['itm_name']+'" /></a></li>';
+				else{
+					buf += '<li><a href="#"><img src="/img/intro_'+cnt+'.jpg" style="width:72px;height:54px" alt="'+data[i]['itm_name']+'" /></a></li>';
+					++cnt;
+					if(cnt > 14)
+						cnt = 0;
+				}
+			}
+			$('#banner')[0].innerHTML = buf;
+			me.rollingSlider();
+		},
+		rollingSlider: function(){
+			var list=$("#banner");//<ul id="banner">를 list 변수에 참조시켰습니다.
+			var show_num=10; //프레임에 사진 노출될 개수
+			var num=0; //이전, 다음 버튼 클릭할 때 증감되는 값
+			var total=$(">li",list).size(); //총 <li>의 개수 5가 저장됨
+			var li_width=$("li:first",list).width(); //<li>의 너비 값을 저장
+
+			/*<li> 태그 중 인덱스 값이 10보다 작은 <li> 태그만 복제합니다.그러므로 0~10 인덱스에 해당하는 <li> 태그가 복제되어<ul id="banner">에 추가합니다.*/
+			var copyObj=$(">li:lt("+show_num+")",list).clone();
+			list.append(copyObj);
+
+			window.timeout = setInterval(function(){
+				if(num==total){ //num 값이 10일 경우 조건문 실행합니다.
+					num=0;
+					list.css("margin-left",num);
+				}
+				num++; //num에 값을 1씩 증가시킵니다.
+				list.stop().animate({marginLeft:-li_width*num+"px"},600)
+			}, 800);
+
+			$("#banner li").off().hover(
+				function() {
+					if(window.timeout)
+						clearInterval(window.timeout);
+				},
+				function(){
+					window.timeout = setInterval(function(){
+						if(num==total){ //num 값이 10일 경우 조건문 실행합니다.
+							num=0;
+							list.css("margin-left",num);
+						}
+						num++; //num에 값을 1씩 증가시킵니다.
+						list.stop().animate({marginLeft:-li_width*num+"px"},600)
+					}, 800);
+				}
+			);
+
+		},
+		list_display: function(data) {
+			var obj = data['res_result'];
+
+			var divData = '';
+
+			for (var i=0;i<obj.length;i++) {
+				divData += '<tr>';
+				divData += '<td>'+obj[i]['itm_sincounter']+'</td>';
+				divData += '<td><a class="launch_view" idx="'+obj[i]['itm_idx']+'" style="cursor:pointer"><small>'+obj[i]['itm_code']+'</small></a></td>';
+				if(obj[i]['itm_imgs'])
+					divData += '<td style="text-align:left"> <img src="data/'+$_SVNAME+'/product_img/'+obj[i]['itm_imgs']+'"> <a class="launch_view" idx="'+obj[i]['itm_idx']+'" style="cursor:pointer">'+obj[i]['itm_name']+'</a></td>';
+				else
+					divData += '<td style="text-align:left"> <img src="/img/no_img.jpg"> <a class="launch_view" idx="'+obj[i]['itm_idx']+'" style="cursor:pointer">'+obj[i]['itm_name']+'</a></td>';
+
+				divData += '<td>'+obj[i]['itm_format']+'</td>';
+				//divData += '<td>'+obj[i]['itm_sincounter']+'</td>';
+
+				divData += '<td>'+obj[i]['itm_color']+'</td>';
+				divData += '<td style="text-align:right">'+number_format(obj[i]['itm_price1'], 2)+'</td>';
+				divData += '<td><input type="checkbox" name="check" value="'+obj[i]['itm_idx']+'"></td>';
+				divData += '</tr>';
+			}
+
+			$('#mytable_list tbody')[0].innerHTML = divData;
+
+		},
+		pagination: function(data,page,num_per_page,targetid) {
+			var divData  = '';
+			var total_page = data['res_page']['total_page'];
+			var prevPage = Math.floor(page / 10) * 10;//소숫점 이하 숫자는 무조건 버림
+			if(prevPage==page) prevPage -= 9;
+			else prevPage += 1;
+			var nextPage = Math.ceil(page / 10) * 10;//소숫점 이하 숫자는 무조건 올림
+			if(total_page < nextPage) nextPage = total_page;
+			if(prevPage!=1)
+				divData += '<a class="launch_page_select" pageno="'+(prevPage-1)+'" style="cursor:pointer"> Prev </a>';
+			for (var i=prevPage;i<=nextPage;i++) {
+				if(i==page) divData += '<a class="current" pageno="'+i+'"><strong>'+i+'</strong></a>';
+				else divData += '<a class="launch_page_select" pageno="'+i+'" style="cursor:pointer">'+i+'</a>';
+			}
+			if(nextPage != total_page)
+				divData += '<a class="launch_page_select" pageno="'+(nextPage+1)+'" style="cursor:pointer"> Next </a>';
+			//$('#page_select').html(divData);
+			$('#'+targetid).html(divData);
+		},
+		click_content_pagemove_submit: function(e) {
+			me.page = $(e).attr('pageno');
+			me.loadDataByMnuAttrib();
+		},
+		setBestDefind: function() {
+			if($("input:checkbox[name=check]:checked").length > 0){
+				bootbox.confirm('선택한 상품을 베스트상품으로 지정 하시겠습니까?', function(result) {
+					if (result) {
+
+						var checkdata = $('#mytable_list input[name=check]:checked').serializeArray();
+						$.ajax({
+							type : 'post',
+							url : '/ajax/set/setListProducts.php',
+							dataType : 'json',
+							data : {
+								action : 'gBestDefind',
+								thread_info : me.thread_info,
+								checkdata : checkdata
+							},
+							success: function(data) {
+								trace(data);
+								if(data !== null) {
+									if(data['MSG']=='OK'){
+
+										bootbox.alert('정상처리 되었습니다.!');
+
+									}else trace(data);
+								}
+							}
+						});
+
+					}
+				});
+			}else{
+				bootbox.alert('먼저 선택하여 주세요!');
+				return;
+			}
+		},
+		listener: function(){
+			$(document).on('click', '.launch_app', function(e) { // 카테고리 클릭
+				e.stopPropagation();
+
+				me.thread_id    = $(this).attr('data-id');
+				me.thread_depth = $(this).attr('data-depth');
+				me.thread_info  = $(this).attr('data-info');
+
+				me.loadData();
+
+			});
+			$(document).on('click', '#search_submit', function(e) { // 검색클릭
+				if(!isEmpty($('#search_text').val())){
+					me.page = 1;
+					me.loadData();
+				}else{
+					showJSModal('검색어를 입력하세요!',300,200,'search_text');
+				}
+			});
+			$(document).on('change', '#limit_select', function(e) { // 표시갯수 선택
+				me.page = 1;
+				me.loadData();
+			});
+			$(document).on('change', '#mnuattrib_select', function(e) { // 출력순서 선택
+				me.page = 1;
+				me.loadDataByMnuAttrib();
+			});
+			$(document).on('click', '.launch_page_select', function(e) {//Page Move
+				me.click_content_pagemove_submit(e.currentTarget);
+			});
+			$(document).on('click', '#check_all', function(e) { // Check All
+				if ($('#check_all:checked').length > 0) {
+					$('input:checkbox[name=check]:not(checked)').prop('checked', true);
+				} else {
+					$('input:checkbox[name=check]:checked').prop('checked', false);
+				}
+			});
+
+
+			$(document).on('click', '#setBestDefind', function() {//베스트상품 지정
+				me.setBestDefind();
+			});
+			$(document).on('click', '#setGiftDefind', function(e) {//사은품 지정
+				alert('준비중입니다');
+			});
+
+
+		}
+	};
+
+
+	if(options) $.extend(this.o, options);
+	if(exfuncs) $.extend(this.exfunc, exfuncs);
+
+
+	this.thread_id;
+	this.thread_depth;
+	this.thread_info;
+
+	this.apiURL = '/ajax/get/getListProducts.php';
+	this.fworking = false;
+	this.page = 1;
+	this.cntSize;
+
+	this.localCache = {
+		timeout: 60000,//1분
+		time: {},
+		data: {},
+		remove: function (url) {
+			delete this.data[url];
+			delete this.time[url];
+		},
+		exist: function (url) {
+			if(this.data.hasOwnProperty(url) && typeof this.data[url] !== 'undefined'){
+				var buf = new Date().getTime() - this.time[url];
+				trace(buf + ' > ' + this.timeout);
+				if(buf > this.timeout)
+					return false;
+				else return true;
+			}else{
+				return false;
+			}
+		},
+		get: function (url) {
+			trace('Getting in cache for url : ' + url);
+			return this.data[url];
+		},
+		set: function (url, cachedData) {
+			this.remove(url);
+			this.data[url] = cachedData;
+			this.time[url] = new Date().getTime();
+
+		}
+	};
+
+
+	this.init = this.method.init;
+	this.urlParamsChk = this.method.urlParamsChk;
+	this.start = this.method.start;
+	this.onPosition = this.method.onPosition;
+	this.loadData = this.method.loadData;
+	this.loadDataByMnuAttrib = this.method.loadDataByMnuAttrib;
+	this.listUpProducts = this.method.listUpProducts;
+	this.listener = this.method.listener;
+	this.list_display = this.method.list_display;
+	this.pagination = this.method.pagination;
+	this.click_content_pagemove_submit = this.method.click_content_pagemove_submit;
+	this.setBestDefind = this.method.setBestDefind;
+	this.clearDisplay = this.method.clearDisplay;
+	this.listUpBestItem = this.method.listUpBestItem;
+	this.rollingSlider = this.method.rollingSlider;
+
+};
+
+
+// Grobal Var
+window._nodes;
+window.objOver = {};
+window.urlParams = {};
+window.timeout;
+
+
+init();
+
+
+});})(jQuery);
+</script>
+
+<!-- [e] Article -->
+

@@ -1,0 +1,794 @@
+
+<!-- [s] Head Ttile -->
+<div id="head_title">
+	<ul id="title">
+		<li id="title_main"><span style="color:#F69500">▣</span>&nbsp;&nbsp;상품등록</li>
+		<li id="title_sub">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;상품 추가 또는 수정/삭제 하는 곳입니다.</li>
+	</ul>
+</div>
+<!-- [e] Head Ttile -->
+
+
+
+
+<!-- [s] article -->
+<div id="article">
+
+
+<script type="text/javascript" src="/js/gJedit.js"></script>
+<script type="text/javascript" src="/js/vendor/jquery.tablednd.min.js"></script>
+<script type="text/javascript" src="/js/vendor/imgLiquid.js"></script>
+
+
+<style type="text/css">
+td.dragHandle {
+
+}
+td.showDragHandle {
+	background-image: url(/jQuery/TableDnD/images/updown2.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor: move;
+}
+</style>
+
+<style type="text/css">
+table th {
+	background-color: <?php echo $_LIST_TH_COLOR; ?>;
+	text-align: center;
+	color: <?php echo $_Text_COLOR; ?>;
+}
+table .tbsubject {
+	background-color: <?php echo $_LIST_TH_COLOR; ?>;
+	text-align: center;
+	color: <?php echo $_Text_COLOR; ?>;
+}
+table .tdcenter {
+	text-align: center;
+}
+table .tdbgcolor {
+	background-color: <?php echo $_LIST_TD_COLOR; ?>;
+}
+</style>
+
+<style type="text/css">
+	#category_menu{
+		z-index:99998;
+		width:auto;
+		border:1px solid <?php echo $_LIST_TH_COLOR; ?>;
+		padding-left:35px;
+	}
+	#category_menu_middle ul {
+		margin-top: 4px;
+	}
+	#category_menu_middle ul > li {
+		padding:6px 20px 6px 20px;
+	}
+	#category_menu_middle ul > li > ul > li {
+		border-top:1px solid #dbdbdb;
+		border-left: 1px solid #dbdbdb;
+	}
+</style>
+
+<style type="text/css">
+.fullfader{position:fixed; z-index:990; display:block; left:0; right:0; top:0; bottom:0; background:rgba(0,0,0,0.7);}
+.wrapmodal .bg_fixed01{position:fixed; z-index:998; overflow:auto; /*word-break:break-all;*/ word-break:break-word; display:block; left:0; right:0; top:0; bottom:0;}
+.wrapmodal .bg_fixed01 .sectionview01{position:relative;overflow:hidden;  display:block; padding-right:50px; width:460px; height:160px;background-color:#fdc900;left:50%; margin-left:-230px; margin-top:400px; margin-bottom:40px;}
+.sectionview01_top{width:460px;height:50px; background-color:#dedede;}
+.bibobs_title80{float:left; color:#fdc900;}
+.bibobs_title80 p{margin-top:20px; margin-left:23px;}
+.close_box05{float:right;}
+.sectionview01_top{overflow:hidden;}
+.close_box05{width:23px; height:23px; background-color:#959493; text-align:center; line-height:23px; color:#fff; margin-right:5px; margin-top:5px;}
+.close_box05 a{color:#fff; text-decoration:none;}
+.section_left10{float:left; background-color:#dedede; width:25px; height:80px;}
+.section_right10{float:right; background-color:#dedede; width:25px; height:80px;}
+.sectionview01_bottom{overflow:hidden; width:460px;}
+.sectionview01_bottom_01{background-color:#dedede; height:30px; width:460px;}
+.section_middle10{float:left; width:408px;}
+.section_middle10 p{margin-left:40px; margin-top:30px;}
+
+</style>
+
+<!-- http://www.easyjstree.com/Demos 참조 -->
+<link href="/css/vendor/easytreeSkin_lion/ui.easytree.css" rel="stylesheet" class="skins" type="text/css">
+<!--[if lt IE 8]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+<![endif]-->
+
+
+<!-- [s] Article -->
+<div id="category_path">HOME</div>
+
+
+<div id="MnuInfoDiv" class="panel panel-primary" style="display:none">
+	<div class="panel-heading">
+		<button type="button" id="mnuWrite" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-cog"> </span> </span>카테고리 환경저장</button>
+	</div>
+
+	<!-- [s] MnuInfo -->
+	<div id="mnuinfo">
+		<form id="mnuFrm" name="mnuFrm" method="post" enctype="multipart/form-data">
+		<input type="hidden" id="mnu_idx" name="mnu_idx" value="">
+		<input type="hidden" id="mnu_thread_id" name="mnu_thread_id" value="">
+		<input type="hidden" id="mnu_thread_depth" name="mnu_thread_depth" value="">
+		<input type="hidden" id="mnu_thread_info" name="mnu_thread_info" value="">
+		<table class="table table-condensed table-bordered">
+		<tr>
+			<th class="col-sm-2  col-lg-2">분류명</th>
+			<td class="col-sm-10  col-lg-10">
+				<input type="text" class="form-control input-xs" name="mnu_name" id="mnu_name" placeholder="분류명" readonly/>
+			</td>
+		</tr>
+		<tr>
+			<th>표시상태</th>
+			<td>
+				<label class="radio-inline">
+					<input type="radio" name="mnu_tggubun" id="mnu_tggubun" value="1" checked>  표시함
+				</label> 
+				<label class="radio-inline">
+					<input type="radio" name="mnu_tggubun" id="mnu_tggubun" value="2" checked>  표시안함
+				</label> 
+			</td>
+		</tr>
+		<tr>
+			<th>배너</th>
+			<td>
+
+				<div class="imgLiquid" style="width:666px; height:100px; border: 1px solid #ddd">
+					<img id="mnu_userfileSrc" src="http://placehold.it/100x100"">
+				</div>
+
+				<input type="file" name="mnu_userfile" id="mnu_userfile" onchange="file_ck('document.mnuFrm','mnu_userfile')"/>
+				<button type="button" id="btn_mnuContents" class="btn btn-default btn-xs pull-right"><span class="fa fa-pencil fa-fw"> </span></button>
+			</td>
+		</tr>
+
+
+		<tr id="mnu_append_hover" style="display:none;">
+			<td colspan="2" class="tdbgcolor">
+
+					<div class="mnu_append_hover_top" style="overflow:hidden;">
+						<div class="pd">
+
+<textarea id="mnu_cathead" name="mnu_cathead" title="editor" style="width:800px;height:100px;" cols="1" rows="1">
+</textarea>
+
+<textarea id="mnu_catcomment" name="mnu_catcomment" title="editor" style="width:800px;height:600px;" cols="1" rows="1">
+</textarea>
+
+<textarea id="mnu_catfooter" name="mnu_catfooter" title="editor" style="width:800px;height:100px;" cols="1" rows="1">
+</textarea>
+
+						</div>
+					</div>
+
+			</td>
+		</tr>
+
+
+		<tr>
+			<th>상품진열</th>
+			<td>
+				<select class="form-control input-sm" name="mnu_attrib" id="mnu_attrib">
+					<option value="9" >카테고리 설정순</option>
+					<option value="1" >최근 등록상품이 위로</option>
+					<option value="2" >최근 등록상품이 아래로</option>
+					<option value="3" >상품명 가나다순</option>
+					<option value="4" >상품명 가나다역순</option>
+					<option value="5" >판매가 높은순</option>
+					<option value="6" >판매가 낮은순</option>
+				</select>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</div>
+	<!-- [e] MnuInfo -->
+
+	<div class="panel-group" id="accordion">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion" href="#ExcelUpload">
+						엑셀 업로드
+					</a>
+				</h4>
+			</div>
+			<div id="ExcelUpload" class="panel-collapse collapse ">
+				<div class="panel-body">
+
+					<!-- [s] Excel Upload -->
+					<div id="uploadExcel">
+						<div>
+							<form name="uploadExcelFrm" id="uploadExcelFrm" action="/setItmExcel.php" target="BlinkExcelFrame" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+							<div>
+								<div class="pull-left">
+									<input type="file" name="excel" />
+								</div>
+								<div style="margin-left:10px;">
+									<div class="btn btn-default btn-xs" onclick="document.uploadExcelFrm.submit();"><span class="glyphicon glyphicon-open"></span> 업로드</div>
+								</div>
+							</div>
+							<div style="clear:both;">
+								<small>
+								<p class="color_r">*엑셀파일만 올려주세요. xls(97-2003 통합문서) </p>
+								<p>예제파일 <a href="/product_upload_ex.xls">다운</a></p>
+								</small>
+							</div>
+							</form>
+						</div>
+						<!-- <iframe width="0" height="0" id="BlinkExcelFrame" name="BlinkExcelFrame" noresize scrolling="no" style="display:none"></iframe> -->
+						<iframe width="100%" height="100px" id="BlinkExcelFrame" name="BlinkExcelFrame" scrolling="auto"></iframe>
+					</div>
+					<!-- [e] Excel Upload -->
+
+				</div>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion" href="#uploadZipImage">
+						이미지 압축 업로드
+					</a>
+				</h4>
+			</div>
+			<div id="uploadZipImage" class="panel-collapse collapse ">
+				<div class="panel-body">
+
+					<!-- [s] Zip Image Upload -->
+					<div>
+						<div class="text-center">
+							<form name="uploadZipImageFrm" id="uploadZipImageFrm" action="/setZipImage.php" target="BlinkZipImageFrame" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+							<div>
+								<div class="pull-left">
+									<input type="file" class="form-control input-sm" name="zipimg" />
+								</div>
+								<div class="pull-left" style="margin-left:10px;">
+									<div class="btn btn-default btn-xs" onclick="document.uploadZipImageFrm.submit();"><span class="glyphicon glyphicon-open"></span> 업로드</div>
+								</div>
+							</div>
+							<div class="pull-left text-left" style="clear:both;margin-top:10px">
+								
+								<small>
+									<p class="text-danger">*이미지는 Zip로 압축해서 올려주셔야 합니다.</p>
+									<p class="text-danger">*확장자는 jpg입니다.</p>
+									<p class="text-danger">*최대 업로드 용량은 200M 입니다.</p>
+								</small>
+								<p>예제파일 <a href="/sample_img.zip">다운</a></p>
+
+
+							</div>
+							</form>
+						</div>
+						<!-- <iframe width="0" height="0" id="BlinkZipImageFrame" name="BlinkZipImageFrame" noresize scrolling="no" style="display:none"></iframe> -->
+						<iframe width="100%" height="100%" id="BlinkZipImageFrame" name="BlinkZipImageFrame" scrolling="auto"></iframe>
+
+					</div>
+					<!-- [e] Zip Image Upload -->
+
+				</div>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion" href="#manageResources">
+						리소스 관리
+					</a>
+				</h4>
+			</div>
+			<div id="manageResources" class="panel-collapse collapse ">
+				<div class="panel-body">
+
+					<!-- [s] Manage Resources -->
+					<div class="text-center">
+						<iframe width="100%" height="800px" id="gManageResources" name="gManageResources" src="/gManageResources.php" frameborder="0" scrolling="auto" allowtransparency="true"></iframe>
+					</div>
+					<!-- [e] Manage Resources -->
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+
+<div id="category_menu">
+	<div id="category_menu_top"></div>
+	<div id="category_menu_middle" ></div>
+	<div id="category_menu_bottom"></div>
+</div>
+
+
+<div id="contentsinfo">
+</div>
+
+
+<!--[s]itm_append_hover-->
+<div id="itm_append_hover" style="display:none;">
+	<div class="itm_append_hover_top" style="overflow:hidden;">
+		<div class="pd">
+
+
+<!-- [s] Editor Table -->
+<form id="Frm" name="Frm" method="post" enctype="multipart/form-data">
+
+<input type="hidden" id="idx" name="idx" value="">
+<input type="hidden" id="thread_id" name="thread_id" value="">
+<input type="hidden" id="thread_depth" name="thread_depth" value="">
+<input type="hidden" id="thread_info" name="thread_info" value="">
+<input type="hidden" id="currentpage" name="currentpage" value="">
+<input type="hidden" id="currentperpage" name="currentperpage" value="">
+
+<input type="hidden" name="copyimgmfront" value="">
+<input type="hidden" name="copyimgmfrontsize" value="">
+<input type="hidden" name="copyimgs" value="">
+<input type="hidden" name="copyimgssize" value="">
+<input type="hidden" name="copyimgl" value="">
+<input type="hidden" name="copyimglsize" value="">
+
+
+<table class="table table-condensed table-bordered">
+<thead>
+<tr>
+	<th colspan="2">상품 등록 </th>
+</tr>
+</thead>
+<tr>
+	<td class="col-sm-2 col-lg-2 tbsubject">상품명 </td>
+	<td class="col-sm-10 col-lg-10 tdbgcolor">
+		<input type="text" name="name" id="name" maxlength="255" value="" class="form-control input-xs">
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">상품코드 </td>
+	<td class="tdbgcolor">
+		<input type="text" name="itmcode" id="itmcode" maxlength="60" size="30" value="" placeholder="code">
+		<button type="button" class="btn btn-default btn-xs" id="goJoy">쪼</button>
+		<button type="button" class="btn btn-default btn-xs" id="goCom">컴</button>
+		<button type="button" class="btn btn-default btn-xs" id="goGgook">꾹</button>
+		<button type="button" class="btn btn-default btn-xs" id="goDanawa">따</button>
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">상품규격/사이즈</td>
+	<td class="tdbgcolor">
+		<input type="text" name="format" maxlength="255" size="30" value="">
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">색상/옵션</td>
+	<td class="tdbgcolor">
+		<input type="text" name="color" maxlength="255" size="30" value="">
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">소비자가격</td>
+	<td class="tdbgcolor">
+		<input type="text" name="sellprice" maxlength="30" size="30" value="" onkeypress='onlyNumber();'>
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">구매가격</td>
+	<td class="tdbgcolor">
+		<input type="text" name="buyprice" id="buyprice" maxlength="15" size="15" value="">
+		<button type="button" class="btn btn-default btn-xs" id="autodccal">자동계산</button>
+		<button type="button" class="btn btn-default btn-xs" id="dccal_clear">계산취소</button>
+		<button type="button" class="btn btn-default btn-xs pull-right" id="optionCall">옵션등록/삭제</button>
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">적립금</td>
+	<td class="tdbgcolor">
+		<label class="radio-inline">
+			<input type="radio" name="juklib_chk" id="juklib_chk" value="1"> 정율제
+		</label>
+		<label class="radio-inline">
+			<input type="radio" name="juklib_chk" id="juklib_chk" value="2" checked> 정액제
+		</label>
+		<input type='text' name='juklib_kum_dc' maxlength='15' size='15' value="">
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">배송료적용</td>
+	<td class="tdbgcolor">
+		<label class="radio-inline">
+			<input type="radio" name="baesong_chk" id="baesong_chk" value="1" checked> 적용
+		</label>
+		<label class="radio-inline">
+			<input type="radio" name="baesong_chk" id="baesong_chk" value="2"> 비적용
+		</label>
+		<label class="radio-inline">
+			<input type="radio" name="baesong_chk" id="baesong_chk" value="3"> 착불
+		</label>
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">판매가격</td>
+	<td>
+
+		<table class="table table-condensed table-bordered">
+		<tr class="tbsubject">
+			<td>기본수량(ex:100개)</td>
+			<td>기본수량(ex:100개)</td>
+			<td>판매수량(ex:200개)</td>
+			<td>판매수량(ex:300개)</td>
+		</tr>
+		<tr>
+			<td class="tdcenter"><label for="su1"><input type="text" name="su1" id="su1" maxlength="15" size="10" value="" class='onlyNumber' onfocus='FocusOn(this)' onblur='FocusOff(this)'> 이하</td>
+			<td class="tdcenter"><label for="su2"><input type="text" name="su2" id="su2" maxlength="15" size="10" value="" class='onlyNumber' onfocus='FocusOn(this)' onblur='FocusOff(this)'> 이상</td>
+			<td class="tdcenter"><label for="su3"><input type="text" name="su3" maxlength="15" size="10" value="" class='onlyNumber' onfocus='FocusOn(this)' onblur='FocusOff(this)'> 이상</td>
+			<td class="tdcenter"><label for="su4"><input type="text" name="su4" maxlength="15" size="10" value="" class='onlyNumber' onfocus='FocusOn(this)' onblur='FocusOff(this)'> 이상</td>
+		</tr>
+		<tr>
+			<td align="center"><?php echo $_PERCENT1; ?> %</td>
+			<td align="center"><?php echo $_PERCENT2; ?> %</td>
+			<td align="center"><?php echo $_PERCENT3; ?> %</td>
+			<td align="center"><?php echo $_PERCENT4; ?> %</td>
+		</tr>
+		<tr>
+			<td class="tdcenter"><label for="price1"><input type="text" name="price1" maxlength="15" size="10" value="" onkeypress='onlyNumber();' onfocus='FocusOn(this)' onblur='FocusOff(this)'> 원</td>
+			<td class="tdcenter"><label for="price2"><input type="text" name="price2" maxlength="15" size="10" value="" onkeypress='onlyNumber();' onfocus='FocusOn(this)' onblur='FocusOff(this)'> 원</td>
+			<td class="tdcenter"><label for="price3"><input type="text" name="price3" maxlength="15" size="10" value="" onkeypress='onlyNumber();' onfocus='FocusOn(this)' onblur='FocusOff(this)'> 원</td>
+			<td class="tdcenter"><label for="price4"><input type="text" name="price4" maxlength="15" size="10" value="" onkeypress='onlyNumber();' onfocus='FocusOn(this)' onblur='FocusOff(this)'> 원</td>
+		</tr>
+		</table>
+
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">판매옵션</td>
+	<td class="tdbgcolor">
+		<label class="radio-inline">
+			<input type="radio" name="chk" id="chk" value="1"> 차등적용함
+		</label>
+		<label class="radio-inline">
+			<input type="radio" name="chk" id="chk" value="2"> 차등이상적용(~개이상 단위로만 판매)
+		</label>
+		<label class="radio-inline">
+			<input type="radio" name="chk" id="chk" value="3" checked> 정산판매
+		</label>
+		<label class="radio-inline">
+			<input type="radio" name="chk" id="chk" value="4"> 품절표시
+		</label>
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">원 산 지</td>
+	<td class="tdbgcolor">
+		<input type="text" name="madein" id="madein" maxlength="60" size="30" value="">
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">수정권한 ID</td>
+	<td class="tdbgcolor">
+		<input type="text" name="update_id" maxlength="60" size="30" value="">
+	</td>
+</tr>
+<tr>
+	<td colspan="2" class="tbsubject">설명, 이미지, 배달 상황 입력</td>
+</tr>
+<tr>
+	<td class="tbsubject">메 모</td>
+	<td class="tdbgcolor">
+		<textarea id="sendcomment" name="sendcomment" rows="7" cols="60"></textarea>
+	</td>
+</tr>
+<tr>
+	<td colspan="2" class="tbsubject">상 세 설 명</td>
+</tr>
+</tr>
+<tr>
+	<td colspan="2" class="tdbgcolor">
+
+<textarea id="itm_subcomment_head" name="itm_subcomment_head" title="editor" style="width:800px;height:100px;" cols="1" rows="1">
+</textarea>
+
+<textarea id="itm_subcomment" name="itm_subcomment" title="editor" style="width:800px;height:600px;" cols="1" rows="1">
+</textarea>
+
+<textarea id="itm_subcomment_foot" name="itm_subcomment_foot" title="editor" style="width:800px;height:100px;" cols="1" rows="1">
+</textarea>
+
+	</td>
+</tr>
+<tr>
+	<td align="center" class="tdbgcolor"><span>이미지올리기</span><br>(<span style="color:red">jpg 포멧만</span>)<br>파일명은 영문자(a~z)와 숫자(1~9,_)의 조합으로 만드세요<br>특수문자(공백문자) 사용금지</td>
+	<td class="tdbgcolor">
+
+		<div class="imgLiquid" style="width:666px; height:100px; border: 1px solid #ddd">
+			<img id="imgfrontSrc" src="http://placehold.it/100x100">
+		</div>
+
+		<input type="file" name="imgmfront" id="imgmfront" onchange="file_ck('document.Frm','imgmfront')" value=""> 대표 이미지(500*500)
+
+	</td>
+</tr>
+
+<tr>
+	<td class="tbsubject">제품이미지</td>
+	<td class="tdbgcolor">
+		<div class="pull-left" style="width:100px; border:1px solid #eee;margin:5px; overflow:hidden;">
+			<!-- <img src="" width="100%"> -->
+			<div style="width:100px;height:100px;">
+				<img id="itm_imgmfront0Src" src="http://placehold.it/100x100" style="width:100px; height:100px;">
+			</div>
+			<div style="margin-top:10px;">
+				<input type="file" name="itm_imgmfront0"/>
+			</div>
+			<div style="margin-top:10px;">
+				<center><div class="btn btn-default btn-xs" onclick="del_img_f('itm_imgmfront0')">삭제</div></center>
+			</div>
+		</div>
+
+		<div class="pull-left" style="width:100px; border:1px solid #eee;margin:5px; overflow:hidden;">
+			<!-- <img src="" width="100%"> -->
+			<div style="width:100px;height:100px;">
+				<img id="itm_imgmfront1Src" src="http://placehold.it/100x100" style="width:100px; height:100px;">
+			</div>
+			<div style="margin-top:10px;">
+				<input type="file" name="itm_imgmfront1"/>
+			</div>
+			<div style="margin-top:10px;">
+				<center><div class="btn btn-default btn-xs" onclick="del_img_f('itm_imgmfront0')">삭제</div></center>
+			</div>
+		</div>
+
+		<div class="pull-left" style="width:100px; border:1px solid #eee;margin:5px; overflow:hidden;">
+			<!-- <img src="" width="100%"> -->
+			<div style="width:100px;height:100px;">
+				<img id="itm_imgmfront2Src" src="http://placehold.it/100x100" style="width:100px; height:100px;">
+			</div>
+			<div style="margin-top:10px;">
+				<input type="file" name="itm_imgmfront2"/>
+			</div>
+			<div style="margin-top:10px;">
+				<center><div class="btn btn-default btn-xs" onclick="del_img_f('itm_imgmfront0')">삭제</div></center>
+			</div>
+		</div>
+
+		<div class="pull-left" style="width:100px; border:1px solid #eee;margin:5px; overflow:hidden;">
+			<!-- <img src="" width="100%"> -->
+			<div style="width:100px;height:100px;">
+				<img id="itm_imgmfront3Src" src="http://placehold.it/100x100" style="width:100px; height:100px;">
+			</div>
+			<div style="margin-top:10px;">
+				<input type="file" name="itm_imgmfront3"/>
+			</div>
+			<div style="margin-top:10px;">
+				<center><div class="btn btn-default btn-xs" onclick="del_img_f('itm_imgmfront0')">삭제</div></center>
+			</div>
+		</div>
+
+		<div class="pull-left" style="width:100px; border:1px solid #eee;margin:5px; overflow:hidden;">
+			<!-- <img src="" width="100%"> -->
+			<div style="width:100px;height:100px;">
+				<img id="itm_imgmfront4Src" src="http://placehold.it/100x100" style="width:100px; height:100px;">
+			</div>
+			<div style="margin-top:10px;">
+				<input type="file" name="itm_imgmfront4"/>
+			</div>
+			<div style="margin-top:10px;">
+				<center><div class="btn btn-default btn-xs" onclick="del_img_f('itm_imgmfront0')">삭제</div></center>
+			</div>
+		</div>
+
+		<div class="pull-left" style="width:100px; border:1px solid #eee;margin:5px; overflow:hidden;">
+			<!-- <img src="" width="100%"> -->
+			<div style="width:100px;height:100px;">
+				<img id="itm_imgmfront5Src" src="http://placehold.it/100x100" style="width:100px; height:100px;">
+			</div>
+			<div style="margin-top:10px;">
+				<input type="file" name="itm_imgmfront5"/>
+			</div>
+			<div style="margin-top:10px;">
+				<center><div class="btn btn-default btn-xs" onclick="del_img_f('itm_imgmfront0')">삭제</div></center>
+			</div>
+		</div>
+
+	</td>
+</tr>
+
+<tr>
+	<td class="tbsubject">매입처 코드</td>
+	<td class="tdbgcolor">
+		<input type="text" name="mibcode" id="mibcode" maxlength="60" size="15" value="">
+		<button type="button" class="btn btn-default btn-xs"  onclick="UserSelect('insert');">선택</button>
+		<input type="text" name="mibname" maxlength="60" size="15" value="">
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">테마 구분자</td>
+	<td class="tdbgcolor">
+		<input type="text" name="maincomment" maxlength="255" size="60" value="">
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">사은품 구분자</td>
+	<td class="tdbgcolor">
+		<input type="text" name="gift" maxlength="255" size="60" value="">
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">쿠폰 구분자</td>
+	<td class="tdbgcolor">
+		<input type="text" name="coupon" maxlength="255" size="60" value="">
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">재고수량</td>
+	<td class="tdbgcolor">
+		<input type="text" name="janek" maxlength="15" size="15" value="">
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">판매 출력순서점수</td>
+	<td class="tdbgcolor">
+		<input type="text" name="pancounter" maxlength="15" size="15" value="">
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">추천 출력순서점수</td>
+	<td class="tdbgcolor">
+		<input type="text" name="chyucounter" maxlength="15" size="15" value="">
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">상품 진열 순서</td>
+	<td class="tdbgcolor">
+		<input type="text" name="sincounter" maxlength="15" size="15" value="" readonly><!-- 수정할 수 없음 -->
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">전시여부</td>
+	<td class="tdbgcolor">
+		<label class="radio-inline">
+			<input type="radio" name="display" id="display" value="1" checked> 전시
+		</label>
+		<label class="radio-inline">
+			<input type="radio" name="display" id="display" value="2"> 전시안함
+		</label> 
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">회원전용</td>
+	<td class="tdbgcolor">
+		<label class="radio-inline">
+			<input type="radio" name="kind" id="kind" value="all" checked> 일반
+		</label>
+		<label class="radio-inline">
+			<input type="radio" name="kind" id="kind" value="bbs"> 회원전용
+		</label> 
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">Master Update</td>
+	<td class="tdbgcolor">
+		<label class="radio-inline">
+			<input type="radio" name="sucess" id="sucess" value="1" checked> 심사
+		</label>
+		<label class="radio-inline">
+			<input type="radio" name="sucess" id="sucess" value="2"> 적용완료
+		</label> 
+	</td>
+</tr>
+<tr>
+	<td class="tbsubject">B2B 공급가격</td>
+	<td class="tdbgcolor">
+		<input type="text" name="b2b_buyprice" maxlength="15" size="15" value="">
+	</td>
+</tr>
+<tr>
+	<td align="center" colspan="2" class="tdbgcolor">
+
+
+<!-- [s] Option List -->
+<div id="productpoll_thread">
+</div>
+<!-- [e] Option List -->
+
+	</td>
+</tr>
+<!-- <tr>
+	<td align="center" colspan="2" class="tdbgcolor">
+include "productsubul_view_list.php";
+	</td>
+</tr> -->
+<tr>
+	<td align="center" colspan="2" class="tdbgcolor">
+		<button type="submit" id="btn_content_save" class="btn btn-primary btn-sm">제품을 등록합니다</button>
+	</td>
+</tr>
+
+
+</table>
+</form>
+<!-- [e] Editor Table -->
+
+
+		</div>
+	</div>
+
+
+<div class="panel-group" id="accordion">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#RelationlistUpProduct">
+					관련상품 보기
+				</a>
+			</h4>
+		</div>
+		<div id="RelationlistUpProduct" class="panel-collapse collapse ">
+			<div class="panel-body">
+
+			<!-- [s] Relation listUp Product -->
+			<div>
+				<div class="pull-left"  style="padding:2px">&nbsp;&nbsp; <div class="btn btn-success btn-xs" onclick="windowOpen('gAddItmPop.php','addItmWin',1000,560,'scrollbars=yes,resizable=no,menubar=no,toolbar=yes,location=no,status=yes')"><span class="glyphicon glyphicon-search"></span> 관련상품 찾기</div></div>
+				<div class="pull-right" style="padding:2px">
+					<div class="btn btn-danger btn-xs" id="saveItmRelation"><span class="fa fa-pencil fa-fw"> </span> 관련상품 등록하기</div>
+				</div>
+
+				<form id="itmRelFrm" name="itmRelFrm" method="post" enctype="multipart/form-data">
+				<table class="listTable table table-condensed table-bordered table-hover">
+				<thead>
+				<tr class="b_color_e">
+					<th style="width: 5%;">No</th>
+					<th class="dlist-sortable" style="width: 10%;">코드</th>
+					<th class="dlist-sortable" style="width: 40%;">품명</th>
+					<th class="dlist-sortable" style="width: 10%;">규격</th>
+					<th class="dlist-sortable" style="width: 10%;">색상</th>
+					<th class="dlist-sortable" style="width: 10%;">단가</th>
+					<th style="width: 15%;">비고</th>
+				</tr>
+				</thead>
+				<tbody id="itmRelation">
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="7" id="itmRelPaging" class="pageination">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="7">
+							<dl class="dl-horizontal">
+							<dt><small>상호등록 적용방식</small></dt>
+								<dd><small>A상품에 B상품을 관련상품으로 등록한 경우 B상품에서도 A가 관련상품으로 등록되며, 삭제하여도 양쪽 모두 자동 삭제 ( <-> )</small></dd>
+							<dt><small>일반등록 적용방식</small></dt>
+								<dd><small>A상품에 B상품을 관련상품으로 등록한 경우 B상품에서도 A가 관련상품으로 등록되지 않으며 A상품에서만 삭제 가능 ( -> )</small></dd>
+							</dt>
+							</dl>
+						</td>
+					</tr>
+				</tfoot>
+				</table>
+				</form>
+
+			</div>
+			<!-- [e] Relation listUp Product -->
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+	<div class="itm_append_hover_bottom">
+		<a href="#" class="close_hover">
+<button type="button" class="btn btn-primary btn-xs btn-block">C L O S E</button>
+		</a>
+	</div>
+</div>
+<!--[e]itm_append_hover-->
+
+<!-- [e] Article -->
+
+
+</div>
+<!-- [e] article -->

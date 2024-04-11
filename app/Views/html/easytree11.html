@@ -1,0 +1,246 @@
+<style type="text/css">
+	#category_menu{
+		margin-top : 15px;
+		margin-bottom: 15px;
+		width:auto;
+		border:1px solid #A9C2E1;
+		padding-left:35px;
+	}
+	#category_menu_middle ul > li {
+		padding:3px 0 3px 20px;
+		position:relative;
+	}
+	#category_menu_middle ul > li > ul > li {
+		border-top:1px solid #A9C2E1;
+	}
+</style>
+
+<!-- http://www.easyjstree.com/Demos 참조 -->
+<link href="/css/vendor/easytreeSkin_lion/ui.easytree.css" rel="stylesheet" class="skins" type="text/css">
+<!--[if lt IE 8]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+<![endif]-->
+
+<!-- [s] Article -->
+
+
+<div id="category_menu">
+	<div id="category_menu_top">
+		<button type="button" class="btn btn-default btn-xs" id="openAllNodes">OpenAllNodes</button>
+		<button type="button" class="btn btn-default btn-xs" id="closeAllNodes">CloseAllNodes</button>
+	</div>
+	<div id="category_menu_middle" ></div>
+	<div id="category_menu_bottom"></div>
+</div>
+
+
+<script type="text/javascript">
+function stateChanged(nodes, nodesJson) {
+
+	window.arrsql = [];
+	window.activeDepth = 0;
+	window.orderlist = '<ul>';
+	nodesChk(nodes,0,false);
+	window.orderlist += '</ul>';
+	//trace(window.orderlist);
+	//window.orderListTree = $("#category_menu_middle").html(window.orderlist).easytree();
+	window.orderListTree = $("#category_menu_middle").html(window.orderlist);
+
+	$('#category_menu_middle li:not(:has(ul))').css({ 'list-style-image': 'url("/img/minus.gif")' });
+	$('#category_menu_middle li:has(ul)').css({ 'cursor': 'pointer', 'list-style-image': 'url("/img/plus.gif")' }).children().hide();
+
+
+	window.nodejson = nodesJson;
+	//trace(window.arrsql);
+
+}
+
+function numToStr(thread_num){
+	var my_thread_info = '';
+	if((thread_num >= 100) && (thread_num < 1000)) {
+		my_thread_info = "0" + thread_num;
+	} else if((thread_num >= 10) && (thread_num < 100)) {
+		my_thread_info = "00" + thread_num;
+	} else if (thread_num < 10) {
+		my_thread_info = "000" + thread_num;
+	} else {
+		my_thread_info = thread_num;
+	}
+	return my_thread_info;
+}
+
+function nodesChk(nodes,depth,active){
+
+	var str;
+	var thread_num = 0;
+	var diStr = '';
+	var i = 0;
+	var start = 0;
+	for (i = 0; i < nodes.length; i++) {
+
+		str = nodes[i].id.split('_');
+		start = str.length - depth;
+		thread_info = '';
+		for (cnt = start; cnt < str.length+1; cnt++) {
+			thread_num  = Number(str[cnt-1]);
+			thread_info += numToStr(thread_num);
+		}
+
+		str = nodes[i].href;
+		window.orderlist += '<li data-id='+str.substring(1, str.length)+' data-depth='+depth+' data-info='+thread_info+'>' + nodes[i].text;
+
+		window.arrsql.push({
+			id: str.substring(1, str.length),
+			depth: depth,
+			info: thread_info,
+			name: nodes[i].text
+		});
+
+
+		if(nodes[i].isActive){
+			trace('------------------------------------------');
+			trace('click_text=>'+nodes[i].text);
+			window.selectedTxt = nodes[i].text;
+
+			trace('click_id=>'+nodes[i].id);
+			window.selectedId = nodes[i].id;
+
+			trace('click_depth=>'+depth);
+			window._depth = depth;
+
+			trace('click_info=>'+thread_info);
+			window._thread_info = thread_info;
+			trace('------------------------------------------');
+
+			active = true;
+			window.activeDepth = depth + 1;
+			window.activeInfo = thread_info;
+
+		}
+
+		if(active){
+
+			if(window.activeDepth == depth){
+				if(window.activeInfo == thread_info.substring(0, (window.activeDepth * 4))){
+					str = nodes[i].href;
+					trace(nodes[i].text + ' | ' + str.substring(1, str.length));
+				}
+			}
+
+		}else{
+			window.activeDepth = 0;
+		}
+
+		if (nodes[i].children && nodes[i].children.length > 0) {
+
+			window.orderlist += '<ul>';
+			nodesChk(nodes[i].children,depth+1,active);
+			window.orderlist += '</ul>';
+			window.orderlist += '</li>';
+
+		} else {
+
+			window.orderlist += '</li>';
+
+		}
+
+	}
+
+}
+
+
+
+(function($){$(document).ready(function(){
+
+var listener = function(data) {
+	window.jsonData = data;
+	//trace(window.jsonData);
+
+	window.easytree = $('#category_menu_middle').easytree({
+		 data: window.jsonData,
+		stateChanged: stateChanged
+	});
+
+	$(document).on('click', '#category_menu_middle li:has(ul)', function(e) {
+		var uid = $(this).attr('data-id');
+		var info = $(this).attr('data-info');
+		trace(uid + ' li:has(ul) ' + info);
+
+		if (this == e.target) {
+			if ($(this).children().is(':hidden')) {
+				$(this).css('list-style-image', 'url("/img/minus.gif")').children().slideDown('fast');
+			} else {
+				$(this).css('list-style-image', 'url("/img/plus.gif")').children().slideUp('fast');
+			}
+		}
+		$(this).children("ul").children("li:has(ul) li").each(function( index, element ) {
+			$(this).parent().css({ 'overflow': 'visible' });
+		});
+		return false;
+	});
+
+	$(document).on('click', '#openAllNodes', function(e) { e.stopPropagation();
+		$('#category_menu_middle li:has(ul)').css({ 'cursor': 'pointer', 'list-style-image': 'url("/img/plus.gif")' }).children().hide();
+		$("#category_menu_middle li:has(ul)").trigger("click"); // all depth open
+	});
+
+	$(document).on('click', '#category_menu_middle li:not(:has(ul))', function(e){
+		var uid = $(this).attr('data-id');
+		var info = $(this).attr('data-info');
+		trace(uid + ' li:not(:has(ul) ' + info);
+	});
+
+	$(document).on('click', '#closeAllNodes', function(e) {
+		$('#category_menu_middle li:has(ul)').css({ 'cursor': 'pointer', 'list-style-image': 'url("/img/plus.gif")' }).children().hide();
+		onClickProc();
+	});
+
+	// 강제크릭
+	onClickProc();
+
+};
+
+var onClickProc = function() {
+	if($('#category_menu_middle li:has(ul)')) {
+		trace('li:has(ul) OK');
+		$('#category_menu_middle > ul > li').each(function(){
+			if($(this).attr('data-depth') == 0){
+				trace('depth=>'+$(this).attr('data-depth'));
+				// $(this).trigger('click');
+			}
+		});
+		$('#category_menu_middle > ul > li').trigger('click');
+	}
+};
+
+var onLoad = function(mode) {
+	$.ajax({
+		url: '/data/getCategory.php',
+		dataType: 'json',
+		data : {
+		},
+		success: function(data){
+			if(data!==null){
+				listener(data);
+			}
+		},
+		complete: function(){
+			//trace('complete');
+		},
+		error: function(data){
+			trace('error');
+		}
+	});
+};
+
+var init = function() {
+	onLoad();
+};
+
+init();
+
+
+});})(jQuery);
+</script>
+
+<!-- [e] Article -->

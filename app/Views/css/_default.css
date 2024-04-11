@@ -1,0 +1,14 @@
+#left_menu {
+	/* margin-top: 15px; */
+	margin-bottom: 15px;
+	width: auto;
+	/* border: 1px solid #a9c2e1; */
+	padding-left: 20px;
+}
+#left_menu_middle ul > li {
+	padding: 3px 0 3px 10px;
+	position: relative;
+}
+#left_menu_middle ul > li > ul > li {
+	border-top: 1px solid #a9c2e1;
+}

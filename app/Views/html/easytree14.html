@@ -1,0 +1,212 @@
+<!-- http://www.easyjstree.com/Demos 참조 -->
+<link href="/css/vendor/easytreeSkin_lion/ui.easytree.css" rel="stylesheet" class="skins" type="text/css">
+<!--[if lt IE 8]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+<![endif]-->
+
+<!-- [s] Article -->
+
+
+<style type="text/css">
+#navigation{z-index:3999;background:#fff;border:1px solid #1a569e;border-radius:5px;height:30px;margin-top:0px}
+#navigation ul{z-index:3998;list-style:none}
+#navigation ul li{z-index:3997;display:inline;float:left;position:relative}
+#navigation ul li a{text-decoration:none;display:inline-block;float:left;line-height:30px;padding:0 20px;color:#333}
+#navigation ul li a:hover{color:#00f;color:#ddd;background:#1a569e}
+#navigation ul li ul{z-index:3996;background:#fff;border:1px solid #1a569e;border-top:0;display:none;position:absolute;top:30px;border-radius:0}
+#navigation ul li ul li a{width:170px}
+#navigation ul li ul li ul{z-index:3995;display:none}
+#navigation ul li ul li:hover>ul{z-index:3994;display:block;top:0;left:100%;border:1px solid #1a569e}
+#navigation ul li:hover>ul{display:block}
+</style>
+
+<div id="navigation">
+</div>
+
+<div id="navigationHtml">
+</div>
+
+
+<script type="text/javascript">
+
+function stateChanged(nodes, nodesJson) {
+
+	window.orderlist = '<ul>\n';
+	nodesChk(nodes,0,false,'');
+	window.orderlist += '</ul>\n';
+	window.orderListTree = $("#navigation").html(window.orderlist);
+	window.orderListTree = $("#navigationHtml").html("<xmp>"+window.orderlist+"</xmp>");
+
+}
+
+function numToStr(thread_num){
+	var my_thread_info = '';
+	if((thread_num >= 100) && (thread_num < 1000)) {
+		my_thread_info = "0" + thread_num;
+	} else if((thread_num >= 10) && (thread_num < 100)) {
+		my_thread_info = "00" + thread_num;
+	} else if (thread_num < 10) {
+		my_thread_info = "000" + thread_num;
+	} else {
+		my_thread_info = thread_num;
+	}
+	return my_thread_info;
+}
+
+function nodesChk(nodes,depth,active,INFO){
+
+	var thread_info;
+	var str;
+	var thread_num = 0;
+	var diStr = '';
+	var i = 0;
+	var start = 0;
+	for (i = 0; i < nodes.length; i++) {
+
+		str = nodes[i].id.split('_');
+		start = str.length - depth;
+		thread_info = '';
+		for (cnt = start; cnt < str.length+1; cnt++) {
+			thread_num  = Number(str[cnt-1]);
+			thread_info += numToStr(thread_num);
+		}
+
+		str = nodes[i].href;
+		ID = str.substring(1, str.length);
+
+		//trace('objOver'+window.objOver);
+
+		if(window.objOver[ID]){ // 표시안함에 해당될 때
+			INFO  = thread_info;
+			active = true;
+		}
+
+
+		if(active){
+
+			if(thread_info.substring(0,INFO.length) == INFO){
+
+				trace(thread_info.substring(0,INFO.length) + '==' + INFO + ' : ' + nodes[i].text);
+
+				active = true;
+
+				// Skip
+				//window.orderlist += '<li data-id='+ID+' data-depth='+depth+' data-info='+thread_info+'><a>' + nodes[i].text + '</a>\n';
+				if (nodes[i].children && nodes[i].children.length > 0) {
+					//window.orderlist += '<ul>\n';
+					nodesChk(nodes[i].children,depth+1,active,INFO);
+					//window.orderlist += '</ul>\n';
+					//window.orderlist += '</li>\n';
+				} else {
+					//window.orderlist += '</li>\n';
+				}
+
+
+			}else{
+
+
+				INFO  = '';
+				active = false;
+
+				window.orderlist += '<li data-id='+ID+' data-depth='+depth+' data-info='+thread_info+'><a>' + nodes[i].text + '</a>\n';
+				if (nodes[i].children && nodes[i].children.length > 0) {
+					window.orderlist += '<ul>\n';
+					nodesChk(nodes[i].children,depth+1,active,INFO);
+					window.orderlist += '</ul>\n';
+					window.orderlist += '</li>\n';
+				} else {
+					window.orderlist += '</li>\n';
+				}
+
+
+			}
+
+
+		}else{
+
+
+				window.orderlist += '<li data-id='+ID+' data-depth='+depth+' data-info='+thread_info+'><a>' + nodes[i].text + '</a>\n';
+				if (nodes[i].children && nodes[i].children.length > 0) {
+					window.orderlist += '<ul>\n';
+					nodesChk(nodes[i].children,depth+1,active,INFO);
+					window.orderlist += '</ul>\n';
+					window.orderlist += '</li>\n';
+				} else {
+					window.orderlist += '</li>\n';
+				}
+
+
+		}
+
+
+	}
+
+}
+
+
+
+(function($){$(document).ready(function(){
+
+window._nodes;
+window.objOver = {};
+
+var getMnuOver = function(action){ //표시유무 확인
+
+	$.ajax({
+		url: '/data/getMnuOver.php',
+		dataType: 'html',
+		data : {
+		},
+		success: function(data){
+			OverChk(data);// 무조건 실행한다
+		}
+	});
+
+};
+
+var OverChk = function(data){
+	if(data!=='null'){ // 여기서 'null'인지 확인
+		arrOverValue = data.split(",");
+		for (var idx in arrOverValue){
+			window.objOver[arrOverValue[idx]] =arrOverValue[idx];
+		}
+	}
+	getCategory();
+};
+
+var getCategory = function() {
+	$.ajax({
+		url: '/data/getCategory.php',
+		dataType: 'json',
+		data : {
+		},
+		success: function(data){
+			if(data!==null){
+
+				window.jsonData = data;
+
+				window.easytree = $('#navigation').easytree({
+					data: window.jsonData,
+					stateChanged: stateChanged
+				});
+			}
+		},
+		error: function(e){
+			trace('error : '+e);
+		}
+	});
+};
+
+var init = function() {
+	getMnuOver('getOver');
+};
+
+
+init();
+
+
+});})(jQuery);
+</script>
+
+<!-- [e] Article -->
+
