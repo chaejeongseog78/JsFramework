@@ -108,6 +108,7 @@ var currPerPage = 10;
 				cache: true,
 				type: "post",
 				dataType: "jsonp",
+				async: false,
 				crossDomain: true,
 				data: {
 					action: "gAppend",

@@ -881,12 +881,12 @@ select {
   margin: 0px;
 }
 
-.m-2 {
-  margin: 0.5rem;
-}
-
 .m-1 {
   margin: 0.25rem;
+}
+
+.m-2 {
+  margin: 0.5rem;
 }
 
 .mx-auto {
@@ -1037,12 +1037,16 @@ select {
   width: 1.5rem;
 }
 
-.w-\[201px\] {
-  width: 201px;
-}
-
 .w-\[250px\] {
   width: 250px;
+}
+
+.w-\[280px\] {
+  width: 280px;
+}
+
+.w-\[281px\] {
+  width: 281px;
 }
 
 .w-\[calc\(100vh-186px\)\] {
@@ -1053,28 +1057,24 @@ select {
   width: 100%;
 }
 
-.w-\[251px\] {
-  width: 251px;
+.w-\[calc\(100\%-186px\)\] {
+  width: calc(100% - 186px);
 }
 
-.w-\[273px\] {
-  width: 273px;
+.w-\[calc\(100\%-200px\)\] {
+  width: calc(100% - 200px);
 }
 
-.w-\[260px\] {
-  width: 260px;
+.w-\[calc\(100\%-500px\)\] {
+  width: calc(100% - 500px);
 }
 
-.w-\[270px\] {
-  width: 270px;
+.w-\[calc\(100\%-280px\)\] {
+  width: calc(100% - 280px);
 }
 
-.w-\[280px\] {
-  width: 280px;
-}
-
-.w-\[281px\] {
-  width: 281px;
+.min-w-full {
+  min-width: 100%;
 }
 
 .max-w-md {
@@ -1131,10 +1131,6 @@ select {
   justify-content: space-between;
 }
 
-.justify-items-center {
-  justify-items: center;
-}
-
 .gap-3 {
   gap: 0.75rem;
 }
@@ -1170,6 +1166,16 @@ select {
   border-color: rgb(239 68 68 / var(--tw-border-opacity));
 }
 
+.border-sky-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(56 189 248 / var(--tw-border-opacity));
+}
+
+.border-\[\#F69500\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(246 149 0 / var(--tw-border-opacity));
+}
+
 .border-b-indigo-500 {
   --tw-border-opacity: 1;
   border-bottom-color: rgb(99 102 241 / var(--tw-border-opacity));
@@ -1188,6 +1194,16 @@ select {
 .border-t-sky-400 {
   --tw-border-opacity: 1;
   border-top-color: rgb(56 189 248 / var(--tw-border-opacity));
+}
+
+.border-b-sky-400 {
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(56 189 248 / var(--tw-border-opacity));
+}
+
+.border-b-\[\#F69500\] {
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(246 149 0 / var(--tw-border-opacity));
 }
 
 .bg-blue-500 {
@@ -1222,12 +1238,20 @@ select {
   padding: 1.25rem;
 }
 
+.p-\[15px\] {
+  padding: 15px;
+}
+
 .p-\[20px\] {
   padding: 20px;
 }
 
-.p-\[15px\] {
-  padding: 15px;
+.p-2 {
+  padding: 0.5rem;
+}
+
+.p-3 {
+  padding: 0.75rem;
 }
 
 .px-3 {

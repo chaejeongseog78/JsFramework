@@ -1,6 +1,6 @@
 <!-- include libraries(jQuery, bootstrap) -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"> -->
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 
 
 
@@ -9,8 +9,8 @@
 
 
 <!-- [s] Head Ttile -->
-<div id="head_title">
-	<ul id="title">
+<div id="head_title" class="w-full p-3 border border-[#F69500]">
+	<ul id="title" class="flex">
 		<li id="title_main"><span style="color:#F69500">▣</span>&nbsp;&nbsp;카테고리등록</li>
 		<li id="title_sub">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;카테고리 추가 또는 수정/삭제 하는 곳입니다.</li>
 	</ul>
@@ -19,18 +19,13 @@
 
 
 <!-- [s] article -->
-<div id="article">
+<div id="article" class="py-3">
 
 
 
 
 <!-- http://www.easyjstree.com/Demos 참조 -->
 <link href="/css/vendor/easytreeSkin_lion/ui.easytree.css" rel="stylesheet" class="skins" type="text/css">
-<!--[if lt IE 8]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
-<![endif]-->
-
-<!-- [s] Article -->
 
 
 <div class="box fl" style="width:40%;">
@@ -407,7 +402,8 @@ var onLoad = function(mode) {
 		success: function(data){
 			//trace(data);
 			if(data!==null){
-				listener(data);
+				// listener(data);
+				listener(null);
 			}
 		},
 		complete: function(){

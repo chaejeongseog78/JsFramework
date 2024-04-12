@@ -74,38 +74,42 @@
 					<button id="ClsNodes" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">close</button>
 				</div>
 				<div id="left_menu">
-					<div id="left_menu_top" class="w-[250px] flex justify-between"> </div>
-					<div id="left_menu_middle" class="w-[250px]"> </div>
-					<div id="left_menu_bottom" class="w-[250px] m-1 py-[20px]  border border-t-sky-400">
-						<ul>
-							<li class="font-bold"><a href="/easytree11">Category</a></li>
-						</ul>
-						<ul>
-							<li class="font-bold"><a href="/fileupload">PHOTO올리기</a></li>
-						</ul>
-						<ul>
-							<li class="font-bold"><a href="/test">TestPage</a></li>
-						</ul>
-						<ul>
-							<li class="font-bold"><a href="/idcheck">중복체크</a></li>
-						</ul>
-						<ul>
-							<li class="font-bold"><a href="/tailwindcss">TailwindCss</a></li>
-						</ul>
-						<ul>
-							<li class="font-bold"><a href="/summernote">섬어Note</a></li>
-						</ul>
-						<ul>
-							<li class="font-bold"><a href="/upload/showimg">ShowImg</a></li>
-						</ul>
-						<ul>
-							<li class="font-bold"><a href="/doc/swagger/dist/">Swagger</a></li>
-						</ul>
-					</div>
+					<div id="left_menu_top"></div>
+					<div id="left_menu_middle" class="w-[250px]"></div>
+					<div id="left_menu_bottom"></div>
+				</div>
+
+				<div class="p-[20px]  border border-t-sky-400">
+					<ul>
+						<li class="font-bold"><a href="/easytree11">Category1</a></li>
+						<li class="font-bold"><a href="/easytree14">Category2</a></li>
+						<li class="font-bold"><a href="/easytree10">CatCRUDs</a></li>
+					</ul>
+					<ul>
+						<li class="font-bold"><a href="/fileupload">PHOTO올리기</a></li>
+					</ul>
+					<ul>
+						<li class="font-bold"><a href="/test">TestPage</a></li>
+					</ul>
+					<ul>
+						<li class="font-bold"><a href="/idcheck">중복체크</a></li>
+					</ul>
+					<ul>
+						<li class="font-bold"><a href="/tailwindcss">TailwindCss</a></li>
+					</ul>
+					<ul>
+						<li class="font-bold"><a href="/summernote">섬어Note</a></li>
+					</ul>
+					<ul>
+						<li class="font-bold"><a href="/upload/showimg">ShowImg</a></li>
+					</ul>
+					<ul>
+						<li class="font-bold"><a href="/doc/swagger/dist/">Swagger</a></li>
+					</ul>
 				</div>
 			</div>
 
 		</nav>
 
 		<!-- [s] contents -->
-		<section class="p-[20px] w-[calc(100vh-186px)] h-[calc(100%-112px)]">
+		<section class="p-[20px] w-[calc(100%-280px)] h-[calc(100%-112px)]">

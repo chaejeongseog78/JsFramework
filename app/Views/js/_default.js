@@ -1,13 +1,13 @@
 (function ($) {
 	const inxstateChanged = (nodes, nodesJson) => {
-		window.arrsql = [];
-		window.activeDepth = 0;
-		window.orderlist = "<ul>";
+		window.inxarrsql = [];
+		window.inxactiveDepth = 0;
+		window.inxorderlist = "<ul>";
 		inxnodesChk(nodes, 0, false);
-		window.orderlist += "</ul>";
-		//trace(window.orderlist);
-		//window.orderListTree = $("#category_menu_middle").html(window.orderlist).easytree();
-		window.orderListTree = $("#left_menu_middle").html(window.orderlist);
+		window.inxorderlist += "</ul>";
+		//trace(window.inxorderlist);
+		//window.inxorderListTree = $("#category_menu_middle").html(window.inxorderlist).easytree();
+		window.inxorderListTree = $("#left_menu_middle").html(window.inxorderlist);
 
 		$("#left_menu_middle li:not(:has(ul))").css({
 			"list-style-image": 'url("/img/minus.gif")',
@@ -17,8 +17,8 @@
 			.children()
 			.hide();
 
-		window.nodejson = nodesJson;
-		//trace(window.arrsql);
+		window.inxnodejson = nodesJson;
+		//trace(window.inxarrsql);
 	};
 
 	const inxnumToStr = (thread_num) => {
@@ -50,7 +50,7 @@
 			}
 
 			str = nodes[i].href;
-			window.orderlist +=
+			window.inxorderlist +=
 				"<li data-id=" +
 				str.substring(1, str.length) +
 				" data-depth=" +
@@ -60,7 +60,7 @@
 				">" +
 				nodes[i].text;
 
-			window.arrsql.push({
+			window.inxarrsql.push({
 				id: str.substring(1, str.length),
 				depth: depth,
 				info: thread_info,
@@ -83,31 +83,31 @@
 				trace("------------------------------------------");
 
 				active = true;
-				window.activeDepth = depth + 1;
+				window.inxactiveDepth = depth + 1;
 				window.activeInfo = thread_info;
 			}
 
 			if (active) {
-				if (window.activeDepth == depth) {
+				if (window.inxactiveDepth == depth) {
 					if (
 						window.activeInfo ==
-						thread_info.substring(0, window.activeDepth * 4)
+						thread_info.substring(0, window.inxactiveDepth * 4)
 					) {
 						str = nodes[i].href;
 						trace(nodes[i].text + " | " + str.substring(1, str.length));
 					}
 				}
 			} else {
-				window.activeDepth = 0;
+				window.inxactiveDepth = 0;
 			}
 
 			if (nodes[i].children && nodes[i].children.length > 0) {
-				window.orderlist += "<ul>";
+				window.inxorderlist += "<ul>";
 				inxnodesChk(nodes[i].children, depth + 1, active);
-				window.orderlist += "</ul>";
-				window.orderlist += "</li>";
+				window.inxorderlist += "</ul>";
+				window.inxorderlist += "</li>";
 			} else {
-				window.orderlist += "</li>";
+				window.inxorderlist += "</li>";
 			}
 		}
 	};
@@ -117,7 +117,7 @@
 			window.jsonData = data;
 			//trace(window.jsonData);
 
-			window.easytree = $("#left_menu_middle").easytree({
+			window.inxeasytree = $("#left_menu_middle").easytree({
 				data: window.jsonData,
 				stateChanged: inxstateChanged,
 			});
@@ -203,6 +203,7 @@
 			$.ajax({
 				url: "/data/getCategory.php",
 				dataType: "json",
+				// async: false,
 				data: {},
 				success: function (data) {
 					if (data !== null) {
@@ -222,7 +223,7 @@
 			$(window).scroll(function () {
 				let wd = $("#sidebar").width();
 				let hi = $("#sidebar").height();
-				console.log(wd);
+				// console.log(wd);
 				let st = $(this).scrollTop();
 				// trace(st + ">" + $("#sidebar").height());
 				if (st > $("#sidebar").height()) {

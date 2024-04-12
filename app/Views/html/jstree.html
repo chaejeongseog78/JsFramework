@@ -1,0 +1,447 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.15/jstree.min.js"></script>
+<!-- <link rel="stylesheet" href="//static.jstree.com/3.3.15/assets/bootstrap/css/bootstrap.min.css" /> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.15/themes/default/style.min.css" />
+
+
+<!-- [s] Head Ttile -->
+<div id="head_title" class="w-full p-3 border border-[#F69500]">
+	<ul id="title" class="flex">
+		<li id="title_main"><span style="color:#F69500">▣</span>&nbsp;&nbsp;카테고리등록</li>
+		<li id="title_sub">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;카테고리 추가 또는 수정/삭제 하는 곳입니다.</li>
+	</ul>
+</div>
+<!-- [e] Head Ttile -->
+
+
+<!-- [s] article -->
+<div id="article" class="py-3">
+
+
+<div id="jstree"></div>
+<input type="text" id="schName" value="">
+<button onclick="fSch()">탐색</button>
+
+
+<button onclick="fSopen()">expand</button> / <button onclick="fSclose()">collapse</button>
+
+
+
+
+<div id="kt_docs_jstree_basic">
+    <ul>
+        <li>
+            Root node 1
+            <ul>
+                <li data-jstree='{ "selected" : true }'>
+                    <a href="javascript:;">
+                        Initially selected </a>
+                </li>
+                <li data-jstree='{ "icon" : "flaticon2-gear text-success " }'>
+                    custom icon URL
+                </li>
+                <li data-jstree='{ "opened" : true }'>
+                    initially open
+                    <ul>
+                        <li data-jstree='{ "disabled" : true }'>
+                            Disabled Node
+                        </li>
+                        <li data-jstree='{ "type" : "file" }'>
+                            Another node
+                        </li>
+                    </ul>
+                </li>
+                <li data-jstree='{ "icon" : "flaticon2-rectangular text-danger" }'>
+                    Custom icon class (bootstrap)
+                </li>
+            </ul>
+        </li>
+        <li data-jstree='{ "type" : "file" }'>
+            <a href="http://www.keenthemes.com">
+                Clickable link node </a>
+        </li>
+    </ul>
+</div>
+
+
+
+
+
+</div>
+<!-- [e] article -->
+
+
+
+
+<script>
+
+// 출처: https://mine-it-record.tistory.com/375 [나만의 기록들:티스토리]
+var jstreeExtend = {};
+
+/**
+* jstree 제어
+* elem : jstree dom 객체
+*/
+jstreeExtend.jstree = function(elem){
+
+//jstree 객체
+$tree = elem;
+
+// jstree 생성
+//$tree.jstree({
+//  //core 제어
+//  'core' : {
+//      'data' : data,
+//      "check_callback" : true // plugins 'dnd'와 같이 사용 이동하고싶을때
+//  },
+//  "plugins" : ["dnd","types"],
+//  "types" : {
+//    "valid_children" : [ "default" ],
+//    "default" : {
+//      "max_depth" : 2 // 하위 depth 제한
+//    }
+//  }
+//});
+
+// 트리 구조 로딩 완료 시
+// $tree.bind("loaded.jstree", function(e) {
+	//...
+// }.bind(this));
+
+// 트리 구조 새로고침 시
+// $tree.bind("refresh.jstree", function(e,d) {
+	//...
+// }.bind(this));
+
+/**
+* 해당 ID 값의 데이터를 리턴
+*  id : node.id
+* */
+this.findCoreData = function(id) {
+	var coreData = $tree.jstree(true).settings.core.data;
+	for (var i=0; i<coreData.length; i++) {
+		var data = coreData[i];
+		if (data.id == id) {
+			return data;
+		}
+	}
+	return null;
+};
+
+/**
+* root node get
+* */
+this.getRootNode = function() {
+	return $tree.jstree(true).get_node('#');
+};
+
+/**
+* 노드의 원시 데이터 set
+* data : arry
+* */
+this.setCoreData = function(data) {
+	$tree.jstree(true).settings.core.data = data;
+};
+
+/**
+* 노드의 원시 데이터 get
+* */
+this.getCoreData = function() {
+	return $tree.jstree(true).settings.core.data;
+};
+
+/**
+* 현재 트리구조 + 원본 데이터를 Merge 하여 데이터를 리턴
+* */
+this.getData = function() {
+	var newData = [];
+	var jdata = $tree.jstree(true).get_json("#", {flat:true});
+	for (var i=0; i<jdata.length; i++) {
+		var current = jdata[i];
+		var id = current.id;
+		var data = this.findCoreData(id);
+		if (data) {
+//        current.text = $("<div>"+current.text+"</div>").text();
+			newData.push($.extend(data, current));
+		}
+	}
+	return newData;
+};
+
+/**
+* 새로고침
+* */
+this.refresh = function() {
+	$tree.jstree(true).refresh();
+}
+
+/**
+* 데이터 추가
+* d : obj
+* */
+this.addData = function(d){
+	var data = this.getData();
+    data.splice(data.length,0,d);
+	this.setCoreData(data);
+	this.refresh(data);
+}
+
+/**
+* 노드 이름 수정 폼
+*  id
+* */
+this.edit = function(id) {
+	$tree.jstree(true).edit(id);
+};
+
+/**
+* 노드 가져오기
+*  id
+* */
+this.getNode = function(id) {
+	return $tree.jstree(true).get_node(id);
+};
+
+/**
+* 자식노드 가져오기
+*  id
+* */
+this.childrenNode = function(id) {
+	var ids = this.getNode(id).children;
+	if(!ids) return [];
+
+	var children = [];
+	for (var i=0; i<ids.length; i++) {
+		children.push(this.getNode(ids[i]));
+	}
+	return children;
+};
+
+/**
+* 부모노드 가져오기
+*  id
+* */
+this.parentNode = function(id) {
+	return this.getNode(this.getNode(id).parent);
+};
+
+/**
+* 전체열기
+* */
+this.openAll = function() {
+	$tree.jstree("open_all");
+};
+
+/**
+* 전체 닫기
+* */
+this.closeAll = function() {
+	$tree.jstree("close_all");
+};
+
+/**
+* 특정 노드 열기
+*  id
+* */
+this.openNode = function(id) {
+	$tree.jstree("open_node", id)
+};
+
+/**
+* 특정 노드 닫기
+*  id
+* */
+this.closeNode = function(id) {
+	$tree.jstree("close_node", id)
+};
+
+/**
+* 특정노드 삭제
+*  id
+* */
+this.removeNode = function(id) {
+	$tree.jstree(true).delete_node(id);
+};
+
+/**
+* 특정노드 이름변경
+* node : 변경할 대상 node
+* text : 변경할 이름 string
+* */
+this.renameNode = function(node, text) {
+	$tree.jstree("rename_node", node, text);
+};
+}
+
+
+//껌색
+        function fSch() {
+            console.log("껌색할께영");
+            $('#jstree').jstree(true).search($("#schName").val());
+        }
+
+        //중요 속성, original, icon, state
+        // root node는 parent를 #
+
+        //Default 설정 바꾸깅, 아래를 주석 처리해보면 모양이 어케 바뀔깡?
+        // $.jstree.defaults.core.themes.variant = "large";
+
+        //맹글기, 옵션없이(디폴트 옵션으로, 요렇게는 잘 안씀)
+        //$("#jstree").jstree();   // creates an instance
+        //$('#tree2').jstree(true); // get an existing instance (will not create new instance)
+
+        //일반적으로 요렇게만 사용해도 충분!
+        $("#jstree").jstree({
+            "plugins": ["search", "contextmenu", "wholerow"],
+	            'core': {
+                'data': {
+                    "url": function (node) {
+                        return "/data/alldata.json"; // ajax로 요청할 URL
+                    }
+                    /*,
+                    "data": function (node) {
+                        return { 'id': node.id }  // ajax로 보낼 데이터(없어서 주석)
+                    }
+                    */,
+                },
+                "check_callback": true,  // 요거이 없으면, create_node 안먹음
+            }
+        });
+
+
+        /* 보통은 위 방식으로 충분하지만, 좀더 세밀한 제어를 하고 싶다면,
+           직접 ajax구현 및 데이터 조작후 callback함수 cb를 이용하여 data세팅
+        $("#jstree").jstree({
+            "plugins": ["search"],
+            'core': {
+                'data': function (obj, cb) {
+                    console.log("ck1:", obj,this);
+
+                    let xhr = new XMLHttpRequest();
+                    xhr.open("get", "alldata.json", true);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            console.log(xhr.responseText);
+                            cb.call(obj, JSON.parse(xhr.responseText));
+                            $('#jstree').jstree(true)
+                        }
+                    }
+                    xhr.send();
+                },
+               "check_callback": true  // 요거이 없으면, create_node 안먹음
+            }
+        });
+        */
+
+
+
+        //이벤트
+        $('#jstree').on("changed.jstree", function (e, data) {
+            console.log("=>",data.selected);
+        });
+
+        // Node 열렸을 땡
+        let isAdded = false;
+        $('#jstree').on("open_node.jstree", function (e, data) {
+            console.log("open되었을땡", data.node);
+
+            // 자식 NODE 맹글기, NODE ID S22(MES)가 열렷을 때
+            // 한번만 김지은 추가하는 예제, 메소드 리스트에서 create_node검색
+            if (!isAdded && data.node.id == 'S22') {
+                let myNode = {
+                    "text": "김지은",
+                    "id": "J09",
+                    "whoisshe": "actress",
+                    "isBestFriend": "Y",
+                    "icon": "glyphicon glyphicon-user"
+                };
+                let myCallBack = () => {
+                    alert("추가했어용");
+                }
+                // NODE 추가
+                $('#jstree').jstree(true).create_node('S22', myNode, "last", myCallBack);
+                isAdded = true;
+            }
+
+        });
+
+        // Node 선택했을 땡
+        $('#jstree').on("select_node.jstree", function (e, data) {
+            console.log("select했을땡", data.node);
+						// $('#jstree').jstree("toggle_node", data.node.id)
+						// $('#jstree').jstree("open_node", data.node.id)
+      			// $('#jstree').jstree(true).toggle_node(e.target);
+        });
+
+
+				$('#jstree')
+    .on('click', function (e) {
+      $('#jstree').jstree(true).toggle_node(e.target);
+    })
+    .jstree({
+      core : {
+        dblclick_toggle : false,
+        'data' : structure}
+    });
+
+
+// 트리 구조 로딩 완료 시
+// $('#jstree').bind("loaded.jstree", function(e) {
+				// $('#jstree').jstree("open_all");
+// }.bind(this));
+
+        function fSopen() {
+					$('#jstree').jstree("open_all");
+				}
+        function fSclose() {
+					$('#jstree').jstree("close_all");
+				}
+
+
+
+        /* 상호작용, 버젼 호환성을 위해 같은 기능에 3가지 표현이 존재한당. 그냥 우에껄 쓰장!
+          $('#jstree').jstree(true).select_node('child_node_1');
+          $('#jstree').jstree('select_node', 'child_node_1');
+          $.jstree.reference('#jstree').select_node('child_node_1');
+
+
+
+
+// state 와 original 속성은 꼬옥 확인해 보장
+
+// 강제로 node 선택하게 하는 메소드
+$('#jstree').jstree(true).select_node(node.id);
+
+// mulitple일 경우 선택된 모든 node 가져오기
+$("#jstree").jstree(true).get_selected("full", true);
+
+ //leaf만 찾기(자식 없으면 leaf)
+ for (node of nodes) {
+     if (!node.children.length) {
+         console.log("leaf:",node.id);
+     }
+ }
+
+
+
+
+					*/
+
+$('#kt_docs_jstree_basic').jstree({
+    "core" : {
+        "themes" : {
+            "responsive": false
+        }
+    },
+    "types" : {
+        "default" : {
+            "icon" : "fa fa-folder"
+        },
+        "file" : {
+            "icon" : "fa fa-file"
+        }
+    },
+    "plugins": ["types"]
+});
+
+
+</script>
