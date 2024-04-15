@@ -1,6 +1,7 @@
 <script type="text/javascript" src="/js/vendor/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="/js/vendor/jquery-confirm.min.js"></script>
 
+<script type="text/javascript" src="/js/vendor/jstree.min.js"></script>
 <script type="text/javascript" src="/js/vendor/jquery.easytree.min.js"></script>
 <script type="text/javascript" src="/js/vendor/jquery.serializejson.min.js"></script>
 

@@ -535,6 +535,7 @@ var currPerPage = 10;
 			$.ajax({
 				url: window.$_DBCONN_HTTP_URL + "/ajax/exec/gBoardExec.php",
 				cache: true,
+				async: false,
 				type: "post",
 				dataType: "jsonp",
 				crossDomain: true,
