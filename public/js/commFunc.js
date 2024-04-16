@@ -7,8 +7,8 @@ function trace(s) {
 	}
 }
 
-function goTo(url) {
-	if (url.stripspace() != "") {
+function goToUrl(url) {
+	if (trim(url) != "") {
 		self.location = url;
 	}
 }

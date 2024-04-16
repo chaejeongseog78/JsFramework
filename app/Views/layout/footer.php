@@ -5,3 +5,5 @@ if (file_exists(APPPATH . "Views/layout/footer/" . $_config['_URL_Last_Nm'] . ".
 } else {
 	$this->extend("layout/footer_default.php");
 }
+
+ob_end_flush();

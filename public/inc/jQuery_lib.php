@@ -38,10 +38,9 @@
 -->
 
 <!-- [s] Common JS -->
-<script type="text/javascript" src="/js/commFunc.js?ver=1.2"></script>
-
+<script type="text/javascript" src="/js/commFunc.js?ver=<?= time() ?>"></script>
+<script type="text/javascript" src="/js/gCommon.js?ver=<?= time() ?>"></script>
 <!-- [e] Common JS -->
-
 
 <!-- confirm-setting.js -->
 <script type="text/javascript" src="/js/vendor/confirm-setting.js"></script>

@@ -11,9 +11,9 @@
 	<meta http-equiv="Site-Exit" content="blendTrans(Duration=1.0)">
 	<link rel="shortcut icon" href="/favicon.ico">
 
-	<link type="text/css" rel="stylesheet" href="/css/_init.css?<?= time(); ?>">
-	<link type="text/css" rel="stylesheet" href="/css/_layout.css?<?= time(); ?>">
-	<link type="text/css" rel="stylesheet" href="/css/_style.css?<?= time() ?>">
+	<link type="text/css" rel="stylesheet" href="/css/_init.css?ver=<?= time(); ?>">
+	<link type="text/css" rel="stylesheet" href="/css/_layout.css?ver=<?= time(); ?>">
+	<link type="text/css" rel="stylesheet" href="/css/_style.css?ver=<?= time() ?>">
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
@@ -33,7 +33,7 @@
 
 	<header class="flex flex-row basis-0 justify-between border border-b-indigo-500 h-[70px] m-0">
 		<div id="logo" class="w-[281px] border border-r-sky-400 flex justify-center items-center">
-			<a href="/">JS Home</a>
+			<a href="/main">JS Home</a>
 		</div>
 		<div id="head" class="flex flex-row justify-end items-center p-[20px] gap-x-24">
 			<p>About</p>
@@ -47,7 +47,7 @@
 
 		<nav class="flex flex-col border border-r-sky-400">
 
-			<form class="bg-white shadow-md rounded px-6 pt-4 pb-6 mb-2 w-[280px]">
+			<form class="bg-white rounded px-6 pt-4 pb-6 mb-2 w-[280px]">
 				<div class="mb-4">
 					<label class="block text-gray-700 text-sm font-bold mb-2" for="username">
 						UserID
@@ -69,20 +69,25 @@
 			</form>
 
 			<div id="sidebar">
-				<div class="flex justify-between items-center px-[10px] py-[5px]">
-					<button id="OpnNodes" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded">expand</button>
-					<button id="ClsNodes" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded">collapse</button>
-				</div>
 				<div id="left_menu">
-					<div id="left_menu_top" class="flex justify-between items-center px-[10px] py-[5px]">
-						<input type="text" id="schCatNm" value="" size="18" class="form-input">
-						<button id="btn_schCatNm" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">검색</button>
+					<div id="left_menu_top" class="border border-t-emerald-900">
+						<div class="flex justify-between items-center px-[10px] py-[10px]">
+							<button id="OpnNodes" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded">expand</button>
+							<button id="ClsNodes" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded">collapse</button>
+						</div>
+						<div class="flex justify-between items-center px-[10px]">
+							<input type="text" name="schCatNm" id="schCatNm" value="" size="18" class="form-input" />
+							<button id="btn_schCatNm" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">검색</button>
+						</div>
 					</div>
 					<div id="left_menu_middle"></div>
 					<div id="left_menu_bottom"></div>
 				</div>
 
-				<div class="p-[10px]  border border-t-sky-400">
+				<div class="p-[10px]">
+					<ul>
+						<li class="font-bold"><a href="/youtubebg">Youtube</a></li>
+					</ul>
 					<ul>
 						<li class="font-bold"><a href="/easytree11">Category1</a></li>
 						<li class="font-bold"><a href="/easytree14">Category2</a></li>

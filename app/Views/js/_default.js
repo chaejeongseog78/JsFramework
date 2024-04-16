@@ -1,25 +1,79 @@
 (function ($) {
+	"use strict";
+
 	document.addEventListener("DOMContentLoaded", () => {
-		$("#left_menu_middle").jstree({
-			plugins: ["search", "wholerow"],
-			core: {
-				data: function (obj, cb) {
-					// console.log("ck1:", obj, this);
-					const xhr = new XMLHttpRequest();
-					// xhr.open("get", "/index.php/ajax/mnumenu/getmnu", true);
-					xhr.open("get", "/ajax/mnumenu/getmnu", true);
-					xhr.onreadystatechange = function () {
-						if (xhr.readyState == 4 && xhr.status == 200) {
-							// console.log(xhr.responseText);
-							cb.call(obj, JSON.parse(xhr.responseText));
-							$("#left_menu_middle").jstree(true);
-						}
-					};
-					xhr.send();
+		const findCoreMnuDat = (id) => {
+			let dats = null;
+			for (let i = 0; i < window.ObjInitMnu.length; i++) {
+				dats = window.ObjInitMnu[i];
+				if (dats.id == id) {
+					return { inx: i, dats: dats };
+				}
+			}
+		};
+		const gDisMnuMenu = () => {
+			let movObjInitMnu = window.ObjInitMnu;
+			if (isset(window.urlParams.mnu) && !empty(window.urlParams.mnu)) {
+				let currMnuObj = findCoreMnuDat(window.urlParams.mnu);
+				if (isset(currMnuObj) && !empty(currMnuObj)) {
+					// console.log(window.ObjInitMnu);
+					// console.log(currMnuObj);
+					// console.log(currMnuObj.dats.state.opened);
+					currMnuObj.dats.state.opened = true;
+					// console.log(currMnuObj.dats.state.selected);
+					currMnuObj.dats.state.selected = true;
+					movObjInitMnu[currMnuObj.inx] = currMnuObj.dats;
+				}
+			}
+			$("#left_menu_middle").jstree({
+				plugins: ["search", "wholerow"],
+				core: {
+					data: movObjInitMnu,
+					multiple: false,
 				},
 				check_callback: true, // 요거이 없으면, create_node 안먹음
-			},
-		});
+			});
+		};
+
+		const mnuOnLOad = () => {
+			$.ajax({
+				url: "/ajax/mnumenu/getmnu",
+				cache: true,
+				type: "get",
+				async: true,
+				crossDomain: true,
+				beforeSend: function () {
+					if (window.localCache.exist("InitMnu")) {
+						window.ObjInitMnu = window.localCache.get("InitMnu");
+						// console.log(window.ObjInitMnu);
+						// console.log("localcache1");
+						//return true;//Cache 사용
+						//return false;//Cache 초기화
+						return true;
+					} else {
+						return true;
+					}
+				},
+				success: function (result) {
+					// console.log(result);
+					window.localCache.set("InitMnu", result);
+					window.ObjInitMnu = window.localCache.get("InitMnu");
+				},
+				error: function (request, status, error) {
+					console.log("getMnu : " + error);
+					if (window.localCache.exist("InitMnu")) {
+						window.ObjInitMnu = window.localCache.get("InitMnu");
+						// console.log("localcache2");
+					}
+				},
+			});
+		};
+		const mnuInit = () => {
+			mnuOnLOad();
+			gDisMnuMenu();
+		};
+
+		mnuInit();
 	});
 
 	$(document).ready(function () {
@@ -27,11 +81,12 @@
 			// Node선택
 			$("#left_menu_middle").on("select_node.jstree", function (e, data) {
 				const obj = data.node.original;
-				console.log("obj=>", obj);
-				const moveURL = obj.gurl;
-				console.log("url=>", moveURL);
-				if (moveURL) {
-					self.location = moveURL;
+				// console.log("obj=>", obj);
+				const gUrl = obj.gurl;
+				if (gUrl) {
+					const moveURL = gUrl + "?mnu=" + obj.id;
+					console.log("url=>", moveURL);
+					goToUrl(moveURL);
 				}
 			});
 

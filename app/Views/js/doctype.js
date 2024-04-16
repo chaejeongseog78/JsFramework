@@ -5,6 +5,7 @@ var currPerPage = 10;
 //## [e] Init Var
 
 (function ($) {
+	"use strict";
 	$(document).ready(function () {
 		var listener = function () {
 			//$(document).on('click', '.launch_append', function(e){e.preventDefault();e.stopPropagation();e.returnValue=false;

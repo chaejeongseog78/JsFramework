@@ -1,9 +1,12 @@
-#left_menu {
-	width: auto;
+#left_menu_middle {
+	padding: 10px 0px 10px 0px;
+	border-bottom: 1px solid #a9c2e1;
 }
-#left_menu_middle ul > li {
-	padding: 4px 0 4px 5px;
-}
-#left_menu_middle ul > li > ul > li {
+#left_menu_middle li {
+	padding: 10px 0px 10px 0px;
 	border-top: 1px solid #a9c2e1;
+}
+
+#left_menu_middle ul > li:first-child {
+	border-top: 0px solid #a9c2e1;
 }
