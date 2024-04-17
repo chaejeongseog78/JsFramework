@@ -19,10 +19,9 @@
 
 	<?php
 	require($_config['ABSPATH'] . "/inc/jsncss.php");
+	echo '<script src="https://cdn.tailwindcss.com"></script>';
+	//echo '<link rel="stylesheet" href="/css/_tailwind.css?ver=' . time() . ">";
 	?>
-
-	<!-- <script src="https://cdn.tailwindcss.com"></script> -->
-	<link rel="stylesheet" href="/css/_tailwind.css?<?= time() ?>">
 
 
 </head>
@@ -93,18 +92,14 @@
 						<li class="font-bold"><a href="/easytree14">Category2</a></li>
 						<li class="font-bold"><a href="/easytree10">CatCRUDs</a></li>
 						<li class="font-bold"><a href="/jstree">JStree</a></li>
-					</ul>
-					<ul>
-						<li class="font-bold"><a href="/fileupload">PHOTO올리기</a></li>
+						<li class="font-bold"><a href="/jstreecss1">JStreeCSS1</a></li>
+						<li class="font-bold"><a href="/jstreecss2">JStreeCSS2</a></li>
 					</ul>
 					<ul>
 						<li class="font-bold"><a href="/test">TestPage</a></li>
 					</ul>
 					<ul>
 						<li class="font-bold"><a href="/idcheck">중복체크</a></li>
-					</ul>
-					<ul>
-						<li class="font-bold"><a href="/tailwindcss">TailwindCss</a></li>
 					</ul>
 					<ul>
 						<li class="font-bold"><a href="/summernote">섬어Note</a></li>

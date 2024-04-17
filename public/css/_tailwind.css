@@ -1148,29 +1148,19 @@ select {
   border-bottom-color: rgb(99 102 241 / var(--tw-border-opacity));
 }
 
-.border-b-sky-400 {
-  --tw-border-opacity: 1;
-  border-bottom-color: rgb(56 189 248 / var(--tw-border-opacity));
-}
-
 .border-r-sky-400 {
   --tw-border-opacity: 1;
   border-right-color: rgb(56 189 248 / var(--tw-border-opacity));
 }
 
-.border-t-indigo-500 {
-  --tw-border-opacity: 1;
-  border-top-color: rgb(99 102 241 / var(--tw-border-opacity));
-}
-
-.border-t-sky-400 {
-  --tw-border-opacity: 1;
-  border-top-color: rgb(56 189 248 / var(--tw-border-opacity));
-}
-
 .border-t-emerald-900 {
   --tw-border-opacity: 1;
   border-top-color: rgb(6 78 59 / var(--tw-border-opacity));
+}
+
+.border-t-indigo-500 {
+  --tw-border-opacity: 1;
+  border-top-color: rgb(99 102 241 / var(--tw-border-opacity));
 }
 
 .bg-blue-500 {
@@ -1270,11 +1260,6 @@ select {
 .py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
-}
-
-.py-\[5px\] {
-  padding-top: 5px;
-  padding-bottom: 5px;
 }
 
 .py-\[10px\] {
