@@ -13,7 +13,6 @@
 
 	<link type="text/css" rel="stylesheet" href="/css/_init.css?ver=<?= time(); ?>">
 	<link type="text/css" rel="stylesheet" href="/css/_layout.css?ver=<?= time(); ?>">
-	<link type="text/css" rel="stylesheet" href="/css/_style.css?ver=<?= time() ?>">
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
@@ -41,10 +40,13 @@
 		</div>
 	</header>
 
-	<!-- [s] wrapper -->
-	<div id="wrapper" class="flex flex-row m-0 flex-nowrap">
+	<main class="flex flex-row m-0 flex-nowrap">
 
 		<nav class="flex flex-col border border-r-sky-400">
+
+			<div class="p-3">
+				<div id="navpulldown" class="flex justify-center items-center"></div>
+			</div>
 
 			<form class="bg-white rounded px-6 pt-4 pb-6 mb-2 w-[280px]">
 				<div class="mb-4">
@@ -69,14 +71,14 @@
 
 			<div id="sidebar">
 				<div id="left_menu">
-					<div id="left_menu_top" class="border border-t-emerald-900">
+					<div id="left_menu_top" class="border border-t-skyblue-900">
 						<div class="flex justify-between items-center px-[10px] py-[10px]">
 							<button id="OpnNodes" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded">expand</button>
+							<button id="btn_schCatNm" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded">search</button>
 							<button id="ClsNodes" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 border border-blue-500 hover:border-transparent rounded">collapse</button>
 						</div>
-						<div class="flex justify-between items-center px-[10px]">
-							<input type="text" name="schCatNm" id="schCatNm" value="" size="18" class="form-input" />
-							<button id="btn_schCatNm" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">검색</button>
+						<div class="flex justify-center items-center px-3">
+							<input type="text" name="schCatNm" id="schCatNm" value="" class="border border-sky-700 form-input min-w-full" />
 						</div>
 					</div>
 					<div id="left_menu_middle"></div>
@@ -92,6 +94,8 @@
 						<li class="font-bold"><a href="/easytree14">Category2</a></li>
 						<li class="font-bold"><a href="/easytree10">CatCRUDs</a></li>
 						<li class="font-bold"><a href="/jstree">JStree</a></li>
+						<li class="font-bold"><a href="/jstree01">JStree01</a></li>
+						<li class="font-bold"><a href="/jstree02">JStree02</a></li>
 						<li class="font-bold"><a href="/jstreecss1">JStreeCSS1</a></li>
 						<li class="font-bold"><a href="/jstreecss2">JStreeCSS2</a></li>
 					</ul>
@@ -116,4 +120,5 @@
 		</nav>
 
 		<!-- [s] contents -->
-		<section class="p-[20px] w-[calc(100%-280px)] h-[calc(100%-112px)]">
+		<!-- <section class="p-[20px] w-[calc(100%-280px)] h-[calc(100%-112px)]"> -->
+		<section class="p-[16px] min-h-full flex flex-col flex-auto border">

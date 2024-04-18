@@ -1,0 +1,78 @@
+<!-- http://www.easyjstree.com/Demos 참조 -->
+<link href="/css/vendor/easytreeSkin_lion/ui.easytree.css" rel="stylesheet" class="skins" type="text/css">
+<!--[if lt IE 8]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+<![endif]-->
+
+<style type="text/css">
+#navigation{z-index:3999;background:#fff;border:1px solid #1a569e;border-radius:5px;height:30px;margin-top:0px}
+#navigation ul{z-index:3998;list-style:none}
+#navigation ul li{z-index:3997;display:inline;float:left;position:relative}
+#navigation ul li span{text-decoration:none;display:inline-block;float:left;line-height:30px;padding:0 20px;color:#333}
+#navigation ul li span:hover{color:#00f;color:#ddd;background:#1a569e}
+#navigation ul li ul{z-index:3996;background:#fff;border:1px solid #1a569e;border-top:0;display:none;position:absolute;top:30px;border-radius:0}
+#navigation ul li ul li span{width:180px}
+#navigation ul li ul li ul{z-index:3995;display:none}
+#navigation ul li ul li:hover>ul{z-index:3994;display:block;top:0;left:100%;border:1px solid #1a569e}
+#navigation ul li:hover>ul{display:block}
+</style>
+
+
+<!-- [s] Head Ttile -->
+<div id="head_title" class="w-full p-3 border border-[#F69500]">
+	<ul id="title" class="flex flex-auto">
+		<li id="title_main" ><span class="text-[#F69500] font-extrabold">▣</span>&nbsp;&nbsp;<span class="font-semibold">카테고리 확인</span>&nbsp;&nbsp;</li>
+		<li class="border border-[#F69500] w-0"></li>
+		<li id="title_sub" class="font-bold h-full">&nbsp;&nbsp;카테고리 추가 또는 수정/삭제 하는 곳입니다.</li>
+	</ul>
+</div>
+<!-- [e] Head Ttile -->
+
+
+<article>
+
+<div id="navigation">
+</div>
+
+<div id="navigationHtml">
+</div>
+
+</article>
+
+
+<script type="text/javascript">
+"use strict";
+document.addEventListener("DOMContentLoaded", () => {
+const onLoad = () => {
+	$.ajax({
+	// url: '/data/get/getMnu.php',
+	url: '/ajax/mnumenu/getPullDownMnu',
+	cache: true,
+	type: "get",
+	async: true,
+	crossDomain: true,
+	data : {
+	},
+	success: function(data){
+		// console.log(data)
+		if(isset(data) && !empty(data)){
+			if(data.MSG == 'OK') {
+				stateChanged(data.DAT);
+			}
+		}
+	}
+	});
+};
+
+const stateChanged = (htm) => {
+	document.getElementById("navigation").innerHTML = htm;
+	$("#navigationHtml").html("<xmp>"+htm+"</xmp>");
+};
+
+const init = () => {
+	onLoad();
+};
+
+init();
+});
+</script>

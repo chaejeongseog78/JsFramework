@@ -25,4 +25,9 @@ body {
 	height: 100vh;
 	box-sizing: border-box;
 }
+
+article {
+	margin-top: 16px;
+}
+
 </style>

@@ -45,22 +45,22 @@
 
 
 <script type="text/javascript">
-function stateChanged(nodes, nodesJson) {
+function stateChanged(htm) {
 
-	window.arrsql = [];
-	window.activeDepth = 0;
-	window.orderlist = '<ul>';
-	nodesChk(nodes,0,false);
-	window.orderlist += '</ul>';
+	// window.arrsql = [];
+	// window.activeDepth = 0;
+	// window.orderlist = '<ul>';
+	// nodesChk(nodes,0,false);
+	// window.orderlist += '</ul>';
 	//trace(window.orderlist);
 	//window.orderListTree = $("#category_menu_middle").html(window.orderlist).easytree();
-	window.orderListTree = $("#category_menu_middle").html(window.orderlist);
+	window.orderListTree = $("#category_menu_middle").html(htm);
 
 	$('#category_menu_middle li:not(:has(ul))').css({ 'list-style-image': 'url("/img/minus.gif")' });
 	$('#category_menu_middle li:has(ul)').css({ 'cursor': 'pointer', 'list-style-image': 'url("/img/plus.gif")' }).children().hide();
 
 
-	window.nodejson = nodesJson;
+	// window.nodejson = nodesJson;
 	//trace(window.arrsql);
 
 }
@@ -162,14 +162,14 @@ function nodesChk(nodes,depth,active){
 
 (function($){$(document).ready(function(){
 
-var listener = function(data) {
-	window.jsonData = data;
+var listener = function() {
+	// window.jsonData = data;
 	//trace(window.jsonData);
 
-	window.easytree = $('#category_menu_middle').easytree({
-		 data: window.jsonData,
-		stateChanged: stateChanged
-	});
+	// window.easytree = $('#category_menu_middle').easytree({
+		//  data: window.jsonData,
+		// stateChanged: stateChanged
+	// });
 
 	$(document).on('click', '#category_menu_middle li:has(ul)', function(e) {
 		var uid = $(this).attr('data-id');
@@ -223,28 +223,23 @@ var onClickProc = function() {
 	}
 };
 
-var onLoad = function(mode) {
-	$.ajax({
-		url: '/data/getCategory.php',
-		dataType: 'json',
+const onLoad = () => {
+		$.ajax({
+		url: '/data/get/getMnu.php',
+		dataType: 'html',
 		data : {
 		},
-		success: function(data){
-			if(data!==null){
-				listener(data);
+		success: function(htm){
+			if(htm!==null){
+				stateChanged(htm);
 			}
-		},
-		complete: function(){
-			//trace('complete');
-		},
-		error: function(data){
-			trace('error');
 		}
 	});
 };
 
 var init = function() {
 	onLoad();
+	listener();
 };
 
 init();
@@ -253,4 +248,3 @@ init();
 });})(jQuery);
 </script>
 
-<!-- [e] Article -->

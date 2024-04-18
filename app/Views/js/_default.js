@@ -68,9 +68,46 @@
 				},
 			});
 		};
+
+		const mnuPullDownOnLoad = () => {
+			$.ajax({
+				url: "/ajax/mnumenu/getPullDownMnu",
+				cache: true,
+				type: "get",
+				async: true,
+				crossDomain: true,
+				beforeSend: function () {
+					if (window.localCache.exist("InitPullDownMnu")) {
+						window.ObjInitMnuPullDown =
+							window.localCache.get("InitPullDownMnu");
+						// console.log(window.ObjInitMnuPullDown);
+						// console.log("localcache1");
+						//return true;//Cache 사용
+						//return false;//Cache 초기화
+						return true;
+					} else {
+						return true;
+					}
+				},
+				success: function (data) {
+					// console.log(data)
+					if (isset(data) && !empty(data)) {
+						if (data.MSG == "OK") {
+							window.localCache.set("InitPullDownMnu", data.DAT);
+							window.ObjInitMnuPullDown =
+								window.localCache.get("InitPullDownMnu");
+							document.getElementById("navpulldown").innerHTML =
+								window.ObjInitMnuPullDown;
+						}
+					}
+				},
+			});
+		};
+
 		const mnuInit = () => {
 			mnuOnLOad();
 			gDisMnuMenu();
+			mnuPullDownOnLoad();
 		};
 
 		mnuInit();

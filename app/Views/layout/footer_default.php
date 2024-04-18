@@ -1,8 +1,7 @@
 <!-- [e] contents -->
 </section>
 
-</div>
-<!-- [e] wrapper -->
+</main>
 
 <footer class="m-0 flex justify-center items-center h-[40px] border border-t-indigo-500">
 	<p class="text-center text-gray-500 text-xs">
