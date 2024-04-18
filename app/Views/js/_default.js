@@ -104,9 +104,12 @@
 				error: function (error) {
 					console.log("getMnuPullDown : " + error);
 					if (window.localCache.exist("InitPullDownMnu")) {
-						window.ObjInitMnu = window.localCache.get("InitPullDownMnu");
+						window.ObjInitMnuPullDown =
+							window.localCache.get("InitPullDownMnu");
 						// console.log("localcache2");
 					}
+					document.getElementById("navpulldown").innerHTML =
+						window.ObjInitMnuPullDown;
 				},
 			});
 		};
