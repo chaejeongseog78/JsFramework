@@ -59,7 +59,7 @@
 					window.localCache.set("InitMnu", result);
 					window.ObjInitMnu = window.localCache.get("InitMnu");
 				},
-				error: function (request, status, error) {
+				error: function (error) {
 					console.log("getMnu : " + error);
 					if (window.localCache.exist("InitMnu")) {
 						window.ObjInitMnu = window.localCache.get("InitMnu");
@@ -99,6 +99,13 @@
 							document.getElementById("navpulldown").innerHTML =
 								window.ObjInitMnuPullDown;
 						}
+					}
+				},
+				error: function (error) {
+					console.log("getMnuPullDown : " + error);
+					if (window.localCache.exist("InitPullDownMnu")) {
+						window.ObjInitMnu = window.localCache.get("InitPullDownMnu");
+						// console.log("localcache2");
 					}
 				},
 			});
