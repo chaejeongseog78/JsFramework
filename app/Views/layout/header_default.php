@@ -87,9 +87,6 @@
 
 				<div class="p-[10px]">
 					<ul>
-						<li class="font-bold"><a href="/youtubebg">Youtube</a></li>
-					</ul>
-					<ul>
 						<li class="font-bold"><a href="/easytree11">Category1</a></li>
 						<li class="font-bold"><a href="/easytree14">Category2</a></li>
 						<li class="font-bold"><a href="/easytree10">CatCRUDs</a></li>
@@ -98,15 +95,6 @@
 						<li class="font-bold"><a href="/jstree02">JStree02</a></li>
 						<li class="font-bold"><a href="/jstreecss1">JStreeCSS1</a></li>
 						<li class="font-bold"><a href="/jstreecss2">JStreeCSS2</a></li>
-					</ul>
-					<ul>
-						<li class="font-bold"><a href="/test">TestPage</a></li>
-					</ul>
-					<ul>
-						<li class="font-bold"><a href="/idcheck">중복체크</a></li>
-					</ul>
-					<ul>
-						<li class="font-bold"><a href="/summernote">섬어Note</a></li>
 					</ul>
 					<ul>
 						<li class="font-bold"><a href="/upload/showimg">ShowImg</a></li>
