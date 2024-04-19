@@ -207,7 +207,7 @@
 							"-moz-opacity": "0.9",
 						})
 						.stop()
-						.animate({ top: st + 6 + "px" }, 500);
+						.animate({ top: st + 6 + "px" }, 100);
 				} else {
 					$("#sidebar")
 						.hide()
