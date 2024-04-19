@@ -11,24 +11,37 @@
 				}
 			}
 		};
+
+		const clsCoreMnuDat = () => {
+			for (let i = 0; i < window.ObjInitMnu.length; i++) {
+				if (window.ObjInitMnu[i].parent == "#") {
+					window.ObjInitMnu[i].state.opened = true;
+					window.ObjInitMnu[i].state.selected = false;
+					window.ObjInitMnu[i].icon = "/img/folder/o-3.gif";
+				} else {
+					window.ObjInitMnu[i].state.opened = false;
+					window.ObjInitMnu[i].state.selected = false;
+					window.ObjInitMnu[i].icon = "/img/folder/b-2.gif";
+				}
+			}
+		};
+
 		const gDisMnuMenu = () => {
-			let movObjInitMnu = window.ObjInitMnu;
+			clsCoreMnuDat();
+			// let movObjInitMnu = JSON.parse(JSON.stringify(window.ObjInitMnu));
 			if (isset(window.urlParams.mnu) && !empty(window.urlParams.mnu)) {
 				let currMnuObj = findCoreMnuDat(window.urlParams.mnu);
 				if (isset(currMnuObj) && !empty(currMnuObj)) {
-					// console.log(window.ObjInitMnu);
-					// console.log(currMnuObj);
-					// console.log(currMnuObj.dats.state.opened);
 					currMnuObj.dats.state.opened = true;
-					// console.log(currMnuObj.dats.state.selected);
 					currMnuObj.dats.state.selected = true;
-					movObjInitMnu[currMnuObj.inx] = currMnuObj.dats;
+					window.ObjInitMnu[currMnuObj.inx] = currMnuObj.dats;
+					window.ObjInitMnu[currMnuObj.inx].icon = "/img/folder/o-3.gif";
 				}
 			}
 			$("#left_menu_middle").jstree({
 				plugins: ["search", "wholerow"],
 				core: {
-					data: movObjInitMnu,
+					data: window.ObjInitMnu,
 					multiple: false,
 				},
 				check_callback: true, // 요거이 없으면, create_node 안먹음
@@ -47,23 +60,26 @@
 						window.ObjInitMnu = window.localCache.get("InitMnu");
 						// console.log(window.ObjInitMnu);
 						// console.log("localcache1");
-						//return true;//Cache 사용
-						//return false;//Cache 초기화
-						return true;
+						gDisMnuMenu();
+						//return true;//Cache 초기화
+						//return false;//Cache 사용
+						return false;
 					} else {
 						return true;
 					}
 				},
 				success: function (result) {
-					// console.log(result);
+					console.log("mnu");
 					window.localCache.set("InitMnu", result);
 					window.ObjInitMnu = window.localCache.get("InitMnu");
+					gDisMnuMenu();
 				},
 				error: function (error) {
 					console.log("getMnu : " + error);
 					if (window.localCache.exist("InitMnu")) {
 						window.ObjInitMnu = window.localCache.get("InitMnu");
-						// console.log("localcache2");
+						console.log("localcache12");
+						gDisMnuMenu();
 					}
 				},
 			});
@@ -81,16 +97,18 @@
 						window.ObjInitMnuPullDown =
 							window.localCache.get("InitPullDownMnu");
 						// console.log(window.ObjInitMnuPullDown);
-						// console.log("localcache1");
-						//return true;//Cache 사용
-						//return false;//Cache 초기화
-						return true;
+						// console.log("localcache2");
+						document.getElementById("navpulldown").innerHTML =
+							window.ObjInitMnuPullDown;
+						//return true;//Cache 초기화
+						//return false;//Cache 사용
+						return false;
 					} else {
 						return true;
 					}
 				},
 				success: function (data) {
-					// console.log(data)
+					console.log("mnupn");
 					if (isset(data) && !empty(data)) {
 						if (data.MSG == "OK") {
 							window.localCache.set("InitPullDownMnu", data.DAT);
@@ -106,17 +124,16 @@
 					if (window.localCache.exist("InitPullDownMnu")) {
 						window.ObjInitMnuPullDown =
 							window.localCache.get("InitPullDownMnu");
-						// console.log("localcache2");
+						console.log("localcache22");
+						document.getElementById("navpulldown").innerHTML =
+							window.ObjInitMnuPullDown;
 					}
-					document.getElementById("navpulldown").innerHTML =
-						window.ObjInitMnuPullDown;
 				},
 			});
 		};
 
 		const mnuInit = () => {
 			mnuOnLOad();
-			gDisMnuMenu();
 			mnuPullDownOnLoad();
 		};
 

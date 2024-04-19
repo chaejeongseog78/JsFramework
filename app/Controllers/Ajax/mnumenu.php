@@ -17,10 +17,10 @@ class mnumenu extends BaseController
 		if ($this->request->is('get')) {
 
 			// $_config = _GetConfig();
-			$_config = InitConfigGlobalHelper::getInitConfig();
+			// $_config = InitConfigGlobalHelper::getInitConfig();
 			$sock = InitConfigGlobalHelper::getConnPDO();
 
-			parse_str($_config['_URL_Last_Nm'], $arrQryDat);
+			// parse_str($_config['_URL_Last_Nm'], $arrQryDat);
 			// print_r($arrQryDat);
 
 			$sql = "SELECT * FROM mnumenu order by parentidx, idx";
@@ -43,6 +43,7 @@ class mnumenu extends BaseController
 					"parent" => $parentidx,
 					"text" => $row['mnuNm'],
 					"gurl" => $row['mnuUrl'],
+					"icon" => "",
 					"state" => array("selected" => $selected, "opened" => $opened)
 				);
 			}
@@ -58,10 +59,10 @@ class mnumenu extends BaseController
 	{
 		if ($this->request->is('get')) {
 
-			$_config = InitConfigGlobalHelper::getInitConfig();
+			// $_config = InitConfigGlobalHelper::getInitConfig();
 			$sock = InitConfigGlobalHelper::getConnPDO();
 
-			parse_str($_config['_URL_Last_Nm'], $arrQryDat);
+			// parse_str($_config['_URL_Last_Nm'], $arrQryDat);
 			// print_r($arrQryDat);
 
 			function chkChild($chkidx)
@@ -128,7 +129,7 @@ class mnumenu extends BaseController
 			$GLOBALS['row'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			// print_r($GLOBALS['row']);
 
-			// $stmt->closeCursor();
+			$stmt->closeCursor();
 			$sock = null;
 			// exit;
 

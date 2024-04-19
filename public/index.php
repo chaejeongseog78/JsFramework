@@ -1,9 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, GET, PUT, DELETE");
-header("Access-Control-Allow-Headers: *");
 
-//인터넷옵션에서 캐시설정이 자동으로 되어잇을때, 무시하고, 캐시사용안한다고 설정하는부분
+// 인터넷옵션에서 캐시설정이 자동으로 되어잇을때, 무시하고, 캐시사용안한다고 설정하는부분
 header("Pragma: no-cache");
 
 ob_start(); //속도때문에.. html을 중간중간 전송하지 않고 모앗다가 한번에 전송함 푸터에 마지막 끝내는 함수 있음.
